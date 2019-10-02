@@ -2,7 +2,7 @@
 
 int main()
 {
-    printf("Hello Pi \n");
+    printf("Hello Raspberry Pi! \n");
     return 0;
 }
 
