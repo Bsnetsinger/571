@@ -3,8 +3,17 @@
 int main()
 {
     
-    int A[20] = {3,8,1,9,7,2,0,4,6,5, 10,15,16,11,18,12,17,13,19,14} ;
-     int size = 20;
+    int A[1000];
+	srand(0);
+
+	int i;
+
+	for(i=0; i<1000; i++)
+	{
+		A[i] = rand();
+	}
+
+    int size = 1000;
 
 	    for(int i=0; i<size; i++)
 	    {
