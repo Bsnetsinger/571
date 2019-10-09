@@ -12,11 +12,11 @@ int main()
             prev = current;
             current = sum;
         }
-        sum = 1;
-        current = 1;
-        prev = 0;
+
+        return 0;
 
     }
+    
 
 }
 

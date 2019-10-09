@@ -1,8 +1,10 @@
+#include <stdio.h>
+
 int main()
 {
-    while(1){
-    int A[8] = {3,8,1,9,7,2,0,4} ;
-     int size = 8;
+    
+    int A[10] = {3,8,1,9,7,2,0,4,6,5} ;
+     int size = 10;
 
 	    for(int i=0; i<size; i++)
 	    {
@@ -17,6 +19,6 @@ int main()
 		}
 	    }
 
-    }
+    return 0;
 
 }
