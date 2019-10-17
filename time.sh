@@ -1,6 +1,6 @@
 #!/bin/bash
-gcc bubbleSort.c -o bubbleSort;
+gcc fibLoop.c -o fibLoop;
 start=$(date +%s.%N);
-./bubbleSort;
+./fibLoop;
 dur=$(echo "$(date +%s.%N) - $start" | bc);
 echo "$dur" >> /home/pi/Desktop/data.txt;
