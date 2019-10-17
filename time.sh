@@ -1,3 +1,4 @@
+#!/bin/bash
 gcc bubbleSort.c -o bubbleSort;
 start=$(date +%s.%N);
 ./bubbleSort;
