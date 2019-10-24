@@ -21,9 +21,9 @@ do
         echo "$i $j $dur" >> /home/pi/Desktop/data.txt;
         if (( $(echo "$temp > $dur" |bc -l) ))
         then
-            temp = $dur;
-            x = $i;
-            y = $j;
+            temp=$dur;
+            x=$i;
+            y=$j;
         fi
     done
 done
