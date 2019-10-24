@@ -14,10 +14,12 @@ for i in {-20..19}
 do 
     for j in {-20..19}
     do
-        start=$(date +%s.%N) 
+        start=$(date +%s.%N);
         sudo nice -n $i ./fibLoop &
+        PID1=$! &
         sudo nice -n $j ./bubbleSort &
-        wait
+        PID2=$!
+        wait [PID1 PID2];
         dur=$(echo "$(date +%s.%N) - $start" | bc);
         echo "$i $j $dur" >> /home/pi/Desktop/data.txt;
         if (( $(echo "$temp > $dur" |bc -l) ))
