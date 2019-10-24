@@ -3,7 +3,8 @@
 
 int main()
 {
-    
+  
+
     int A[1000];
 	srand(0);
 
@@ -11,7 +12,7 @@ int main()
 
 	for(i=0; i<1000; i++)
 	{
-		A[i] = rand();
+		A[i] = 1000 - i;
 	}
 
     int size = 1000;
