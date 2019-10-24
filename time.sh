@@ -14,8 +14,7 @@ for i in {-20..19}
 do 
     for j in {-20..19}
     do
-        start=$(date +%s.%N) &
-        wait
+        start=$(date +%s.%N) 
         sudo nice -n $i ./fibLoop &
         sudo nice -n $j ./bubbleSort &
         wait
