@@ -19,7 +19,8 @@ do
         sudo nice -n $j ./bubbleSort;
         dur=$(echo "$(date +%s.%N) - $start" | bc);
         echo "$i $j $dur" >> /home/pi/Desktop/data.txt;
-        if [[ $temp -gt $dur ]]
+        st = 'echo "$temp > $dur" | bc'
+        if [ $st -eq 1 ]
         then
             temp = $dur;
             x = $i;
