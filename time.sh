@@ -8,8 +8,8 @@ do
     for j in {-20..19}
     do
         start=$(date +%s.%N);
-        nice -n $i ./fibLoop &
-        nice -n $j ./bubbleSort;
+        sudo nice -n $i ./fibLoop &
+        sudo nice -n $j ./bubbleSort;
         dur=$(echo "$(date +%s.%N) - $start" | bc);
         echo "$i $j $dur" >> /home/pi/Desktop/data.txt;
     done
