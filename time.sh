@@ -19,7 +19,7 @@ do
         PID1=$! &
         sudo nice -n $j ./bubbleSort &
         PID2=$!
-        wait [$PID1 $PID2];
+        wait [$PID1, $PID2];
         dur=$(echo "$(date +%s.%N) - $start" | bc);
         echo "$i $j $dur" >> /home/pi/Desktop/data.txt;
         if (( $(echo "$temp > $dur" |bc -l) ))
