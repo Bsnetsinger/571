@@ -16,7 +16,7 @@ do
     start=$(date +%s.%N);
     ./fibLoop;
     dur=$(echo "$(date +%s.%N) - $start" | bc);
-    x=$(echo "$x + $dur" | bc);
+    x="$( bc <<<"$x + $dur" )";
 done
 
 for j in {0..100}
