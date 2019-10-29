@@ -8,15 +8,18 @@ temp=$(echo "$(date +%s.%N) - $start" | bc);
 
 gcc fibLoop.c -o fibLoop;
 gcc bubbleSort.c -o bubbleSort;
-x=0;
 y=0;
 
-for i in {0..100}
+start=$(date +%s.%N);
+./fibLoop;
+x=$(echo "$(date +%s.%N) - $start" | bc);
+
+for i in {1..100}
 do 
     start=$(date +%s.%N);
     ./fibLoop;
     dur=$(echo "$(date +%s.%N) - $start" | bc);
-    x="$( bc <<<"$x + $dur" )";
+    x=$(echo "$x + $dur" | bc);
 done
 
 for j in {0..100}
