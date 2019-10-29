@@ -8,8 +8,8 @@ temp=$(echo "$(date +%s.%N) - $start" | bc);
 
 gcc fibLoop.c -o fibLoop;
 gcc bubbleSort.c -o bubbleSort;
-x=0.000;
-y=0.000;
+x=0;
+y=0;
 
 for i in {0..100}
 do 
@@ -18,6 +18,7 @@ do
     dur=$(echo "$(date +%s.%N) - $start" | bc);
     x=(( $(echo "$x + $dur" | bc) ));
 done
+
 for j in {0..100}
 do 
     start=$(date +%s.%N);
@@ -25,4 +26,5 @@ do
     dur=$(echo "$(date +%s.%N) - $start" | bc);
     y=(( $(echo "$y + $dur" | bc) ));
 done
+
 echo "100 Runs of fibLoop: $x \n 100 Runs of bubbleSort: $y" >> /home/pi/Desktop/runTimes.txt;
