@@ -8,7 +8,8 @@ temp=$(echo "$(date +%s.%N) - $start" | bc);
 
 gcc fibLoop.c -o fibLoop;
 gcc bubbleSort.c -o bubbleSort;
-
+x=0.000;
+y=0.000;
 
 for i in {0..100}
 do 
