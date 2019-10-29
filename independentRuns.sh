@@ -10,7 +10,7 @@ gcc bubbleSort.c -o bubbleSort;
 x=0.00;
 y=0.00;
 
-for i in {0..100}
+for i in {0..1000}
 do 
     start=$(date +%s.%N);
     ./fibLoop;
@@ -18,7 +18,7 @@ do
     x=$(echo "$x + $dur" | bc);
 done
 
-for j in {0..100}
+for j in {0..1000}
 do 
     start=$(date +%s.%N);
     ./bubbleSort;
@@ -26,4 +26,5 @@ do
     y=$(echo "$y + $dur2" | bc);
 done
 
-echo "100 Runs of fibLoop: $x \n 100 Runs of bubbleSort: $y" >> /home/pi/Desktop/runTimes.txt;
+echo "1000 Runs of fibLoop: $x" >> /home/pi/Desktop/runTimes.txt;
+echo "1000 Runs of bubbleSort: $y" >> /home/pi/Desktop/runTimes.txt;
