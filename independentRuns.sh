@@ -1,5 +1,4 @@
 #!/bin/bash
-
 declare -i x;
 declare -i y;
 
