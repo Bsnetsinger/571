@@ -23,6 +23,29 @@ namespace _571hw3
 
             Console.WriteLine("{0} , {1}, {2}", Input, Type, Energy);
 
+            string[] line = new string[6];
+            int i;
+
+            if (Input == "input1.txt")
+            {
+                System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input1.txt");
+
+                for (i = 0; i < 6; i++)
+                {
+                    line[i] = file.ReadLine();
+                    Console.WriteLine("{0}", line[i]);
+                }
+            }
+            else if(Input == "input2.txt")
+            {
+                System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input2.txt");
+                for (i = 0; i < 6; i++)
+                {
+                    line[i] = file.ReadLine();
+                    Console.WriteLine("{0}", line[i]);
+                }
+            }
+            
 
             Console.ReadKey();
 
