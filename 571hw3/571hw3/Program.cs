@@ -57,32 +57,26 @@ namespace _571hw3
 
             if(Type == "EDF")
             {
-                if(Energy == "EE")
-                {
-
-                }
-                else
-                {
-
-                }
+                EDF(w1, w2, w3, w4, w5, data, Energy);
             }
             else if(Type == "RM")
             {
-                if(Energy == "EE")
-                {
-
-                }
-                else
-                {
-
-                }
+                RM(w1, w2, w3, w4, w5, data, Energy);
             }
-
 
             Console.ReadKey();
 
+        }
 
-
+        static void RM(Task w1, Task w2, Task w3, Task w4, Task w5, Data data, string EE)
+        {
+            Console.WriteLine("RM selected");
+            return;
+        }
+        static void EDF(Task w1, Task w2, Task w3, Task w4, Task w5, Data data, string EE)
+        {
+            Console.WriteLine("EDF selected");
+            return;
         }
     }
 }
