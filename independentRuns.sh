@@ -1,6 +1,4 @@
 #!/bin/bash
-
-
 start=$(date +%s.%N);
 sleep 0.851111111;
 temp=$(echo "$(date +%s.%N) - $start" | bc);
