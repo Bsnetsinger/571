@@ -86,38 +86,18 @@ namespace _571hw3
                 {
                     case 1:
                         w1.Execute();
-                        if(highestPriority != lastExec)
-                        {
-                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w1.name, i, "TBD");
-                        }
                         break;
                     case 2:
-                        w1.Execute();
-                        if (highestPriority != lastExec)
-                        {
-                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w1.name, i, "TBD");
-                        }
+                        w2.Execute();
                         break;
                     case 3:
                         w3.Execute();
-                        if (highestPriority != lastExec)
-                        {
-                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w3.name, i, "TBD");
-                        }
                         break;
                     case 4:
                         w4.Execute();
-                        if (highestPriority != lastExec)
-                        {
-                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w4.name, i, "TBD");
-                        }
                         break;
                     case 5:
-                        w1.Execute();
-                        if (highestPriority != lastExec)
-                        {
-                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w5.name, i, "TBD");
-                        }
+                        w5.Execute();
                         break;
                 }
                 lastExec = highestPriority;
