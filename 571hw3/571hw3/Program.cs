@@ -10,7 +10,20 @@ namespace _571hw3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string Input;
+            string Type;
+            string Energy;
+
+            Console.WriteLine("Input file name: ");
+            Input = Console.ReadLine();
+            Console.WriteLine("Scheduling type: ");
+            Type = Console.ReadLine();
+            Console.WriteLine("EE or N/A: ");
+            Energy = Console.ReadLine();
+
+            Console.WriteLine("{0} , {1}, {2}", Input, Type, Energy);
+
+
             Console.ReadKey();
 
         }
