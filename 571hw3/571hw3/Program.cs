@@ -70,6 +70,59 @@ namespace _571hw3
 
         static void RM(Task w1, Task w2, Task w3, Task w4, Task w5, Data data, string EE)
         {
+            int lastExec = 0;
+            int startTime = 0;
+            for(int i = 0; i < 1000; i++)
+            {
+                w1.CurrentTime(i);
+                w2.CurrentTime(i);
+                w3.CurrentTime(i);
+                w4.CurrentTime(i);
+                w5.CurrentTime(i);
+
+                int highestPriority = LowestPeriod(w1, w2, w3, w4, w5);
+
+                switch (highestPriority)
+                {
+                    case 1:
+                        w1.Execute();
+                        if(highestPriority != lastExec)
+                        {
+                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w1.name, i, "TBD");
+                        }
+                        break;
+                    case 2:
+                        w1.Execute();
+                        if (highestPriority != lastExec)
+                        {
+                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w1.name, i, "TBD");
+                        }
+                        break;
+                    case 3:
+                        w3.Execute();
+                        if (highestPriority != lastExec)
+                        {
+                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w3.name, i, "TBD");
+                        }
+                        break;
+                    case 4:
+                        w4.Execute();
+                        if (highestPriority != lastExec)
+                        {
+                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w4.name, i, "TBD");
+                        }
+                        break;
+                    case 5:
+                        w1.Execute();
+                        if (highestPriority != lastExec)
+                        {
+                            Console.WriteLine("{0}  {1}  {2}  {3}  {4}", startTime, w5.name, i, "TBD");
+                        }
+                        break;
+                }
+                lastExec = highestPriority;
+            }
+
             Console.WriteLine("RM selected");
             return;
         }
@@ -77,6 +130,35 @@ namespace _571hw3
         {
             Console.WriteLine("EDF selected");
             return;
+        }
+
+        //Returns int corresponding with lowest period task
+        static int LowestPeriod(Task w1, Task w2, Task w3, Task w4, Task w5)
+        {
+            int lowest = w1.period;
+            int task = 1;
+
+            if(w1.period >= w2.period)
+            {
+                lowest = w2.period;
+                task = 2;
+            }
+            if(lowest >= w3.period)
+            {
+                lowest = w3.period;
+                task = 3;
+            }
+            if(lowest >= w4.period)
+            {
+                lowest = w4.period;
+                task = 4;
+            }
+            if(lowest >= w5.period)
+            {
+                lowest = w4.period;
+                task = 5;
+            }
+            return task;
         }
     }
 }
