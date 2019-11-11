@@ -21,7 +21,8 @@ namespace _571hw3
             Console.WriteLine("EE or N/A: ");
             Energy = Console.ReadLine();
 
-            Console.WriteLine("{0} , {1}, {2}", Input, Type, Energy);
+            //-------------------------------------------------------------------------------------------------------------------------------------------
+            //Reading Files / Constructing Objects
 
             string[] line = new string[6];
             int i;
@@ -44,19 +45,42 @@ namespace _571hw3
                 }
             }
 
+            Data data = new Data(line[0]);
             Task w1 = new Task(line[1]);
             Task w2 = new Task(line[2]);
             Task w3 = new Task(line[3]);
             Task w4 = new Task(line[4]);
-            Task w5 = new Task(line[5]);
+            Task w5 = new Task(line[5]);    
 
-            Console.WriteLine("{0}", w1.period);
-            
+            //--------------------------------------------------------------------------------------------------------------------------------------
+            //Schedule Algorithms
+
+            if(Type == "EDF")
+            {
+                if(Energy == "EE")
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+            else if(Type == "RM")
+            {
+                if(Energy == "EE")
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+
 
             Console.ReadKey();
 
-
-            //Successful push
 
 
         }

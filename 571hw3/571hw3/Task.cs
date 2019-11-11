@@ -2,9 +2,9 @@
 
 public class Task
 {
-    private string name;
+    public string name;
     public int period;
-    private int wcet1188, wcet918, wcet648, wcet384;
+    public int wcet1188, wcet918, wcet648, wcet384;
 
     public Task(string LineIn)
     {
