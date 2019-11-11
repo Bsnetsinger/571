@@ -33,7 +33,6 @@ namespace _571hw3
                 for (i = 0; i < 6; i++)
                 {
                     line[i] = file.ReadLine();
-                    Console.WriteLine("{0}", line[i]);
                 }
             }
             else if(Input == "input2.txt")
@@ -42,9 +41,16 @@ namespace _571hw3
                 for (i = 0; i < 6; i++)
                 {
                     line[i] = file.ReadLine();
-                    Console.WriteLine("{0}", line[i]);
                 }
             }
+
+            Task w1 = new Task(line[1]);
+            Task w2 = new Task(line[2]);
+            Task w3 = new Task(line[3]);
+            Task w4 = new Task(line[4]);
+            Task w5 = new Task(line[5]);
+
+            Console.WriteLine("{0}", w1.period);
             
 
             Console.ReadKey();

@@ -3,7 +3,7 @@
 public class Task
 {
     private string name;
-    private int period;
+    public int period;
     private int wcet1188, wcet918, wcet648, wcet384;
 
     public Task(string LineIn)
@@ -16,4 +16,6 @@ public class Task
         wcet648 = Convert.ToInt32(values[4]);
         wcet384 = Convert.ToInt32(values[5]);
     }
+
+    
 }
