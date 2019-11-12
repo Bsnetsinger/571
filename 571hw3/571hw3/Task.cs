@@ -5,9 +5,11 @@ public class Task
     public string name;
     public int period;
     public int wcet1188, wcet918, wcet648, wcet384;
+
     public bool available;
     public int remainingTime;
     public int periodCount;
+    public int nextArrival;
 
     public Task(string LineIn)
     {
@@ -18,9 +20,11 @@ public class Task
         wcet918 = Convert.ToInt32(values[3]);
         wcet648 = Convert.ToInt32(values[4]);
         wcet384 = Convert.ToInt32(values[5]);
+
         available = true;
         remainingTime = wcet1188;
         periodCount = 0;
+        nextArrival = period;
     }
     public void CurrentTime(int Time)
     {
@@ -35,11 +39,15 @@ public class Task
         else
             available = false;
     }
-    public void Execute()
+    public void Execute(int time)
     {
         if (remainingTime > 0)
-            remainingTime--;
-        else
-            Console.WriteLine("Error: Attempt to execute completed task.");
+            remainingTime -= time;
+
+        if (remainingTime == 0) //Once current task completed, calculate next arrival
+        {
+            nextArrival += period;
+            available = false;
+        }
     }
 }

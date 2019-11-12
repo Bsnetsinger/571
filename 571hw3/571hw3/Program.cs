@@ -29,7 +29,7 @@ namespace _571hw3
 
             if (Input == "input1.txt")
             {
-                System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input1.txt");
+                System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\input1.txt");
 
                 for (i = 0; i < 6; i++)
                 {
@@ -46,99 +46,94 @@ namespace _571hw3
             }
 
             Data data = new Data(line[0]);
-            Task w1 = new Task(line[1]);
-            Task w2 = new Task(line[2]);
-            Task w3 = new Task(line[3]);
-            Task w4 = new Task(line[4]);
-            Task w5 = new Task(line[5]);    
+            Task[] taskArray = new Task[5];
+            taskArray[0] = new Task(line[1]);
+            taskArray[1] = new Task(line[2]);
+            taskArray[2] = new Task(line[3]);
+            taskArray[3] = new Task(line[4]);
+            taskArray[4] = new Task(line[5]);
+            
 
             //--------------------------------------------------------------------------------------------------------------------------------------
             //Schedule Algorithms
 
             if(Type == "EDF")
             {
-                EDF(w1, w2, w3, w4, w5, data, Energy);
+                EDF(taskArray, data, Energy);
             }
             else if(Type == "RM")
             {
-                RM(w1, w2, w3, w4, w5, data, Energy);
+                RM(taskArray, data, Energy);
             }
 
             Console.ReadKey();
 
         }
 
-        static void RM(Task w1, Task w2, Task w3, Task w4, Task w5, Data data, string EE)
+        static void RM(Task[] taskArray, Data data, string EE)
         {
-            int lastExec = 0;
-            int startTime = 0;
-            for(int i = 0; i < 1000; i++)
+            int counter = 0;
+            Task[] priorityArray = LowestPeriod(taskArray);
+            while (counter <= 1000)
             {
-                w1.CurrentTime(i);
-                w2.CurrentTime(i);
-                w3.CurrentTime(i);
-                w4.CurrentTime(i);
-                w5.CurrentTime(i);
 
-                int highestPriority = LowestPeriod(w1, w2, w3, w4, w5);
-
-                switch (highestPriority)
+                for(int k = 0; k < 5; k++)
                 {
-                    case 1:
-                        w1.Execute();
-                        break;
-                    case 2:
-                        w2.Execute();
-                        break;
-                    case 3:
-                        w3.Execute();
-                        break;
-                    case 4:
-                        w4.Execute();
-                        break;
-                    case 5:
-                        w5.Execute();
-                        break;
+                    priorityArray[k].CurrentTime(counter); //If task arrived, resets remaining time and becomes available 
                 }
-                lastExec = highestPriority;
+
+                int i = 0; //Set to index of available task w/ highest priority
+                while (!(priorityArray[i].available))
+                {
+                    i++;
+                    if (i == 5)
+                        break; //No tasks available
+                }
+
+                int nextArrival = priorityArray[0].nextArrival;
+                for (int j = 1; j < 5; j++)
+                {
+                    if (nextArrival > priorityArray[j].nextArrival)
+                        nextArrival = priorityArray[j].nextArrival;
+                }
+                int time;
+                if (priorityArray[i].remainingTime < nextArrival - counter)
+                    time = priorityArray[i].remainingTime;
+                else
+                    time = nextArrival - counter;
+
+                counter += time;
+                priorityArray[i].Execute(time);
+                Console.WriteLine("{0}", time);
+                Console.WriteLine("{0} {1} {2} {3}", counter - time, priorityArray[i].name, 1188, time);
             }
 
             Console.WriteLine("RM selected");
             return;
         }
-        static void EDF(Task w1, Task w2, Task w3, Task w4, Task w5, Data data, string EE)
+        static void EDF(Task[] taskArray, Data data, string EE)
         {
             Console.WriteLine("EDF selected");
             return;
         }
 
-        //Returns int corresponding with lowest period task
-        static int LowestPeriod(Task w1, Task w2, Task w3, Task w4, Task w5)
+        //Bubble sorts array with respect to period
+        static Task[] LowestPeriod(Task[] taskArray)
         {
-            int lowest = w1.period;
-            int task = 1;
-
-            if(w1.period >= w2.period)
+            Task[] newTaskArray = taskArray;
+            for(int i = 0; i < 5; i++)
             {
-                lowest = w2.period;
-                task = 2;
+                for(int j = 0; j < 4; j++)
+                {
+                    if( newTaskArray[j].period > newTaskArray[j+1].period )
+                    {
+                        Task temp = newTaskArray[j];
+                        newTaskArray[j] = newTaskArray[j + 1];
+                        newTaskArray[j + 1] = temp;
+                    }
+                }
             }
-            if(lowest >= w3.period)
-            {
-                lowest = w3.period;
-                task = 3;
-            }
-            if(lowest >= w4.period)
-            {
-                lowest = w4.period;
-                task = 4;
-            }
-            if(lowest >= w5.period)
-            {
-                lowest = w4.period;
-                task = 5;
-            }
-            return task;
+            return newTaskArray;
         }
     }
 }
