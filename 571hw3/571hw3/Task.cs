@@ -24,7 +24,7 @@ public class Task
         available = true;
         remainingTime = wcet1188;
         periodCount = 0;
-        nextArrival = period;
+        nextArrival = 0;
     }
     public void CurrentTime(int Time)
     {

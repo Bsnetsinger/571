@@ -74,7 +74,7 @@ namespace _571hw3
         {
             int counter = 0;
             Task[] priorityArray = LowestPeriod(taskArray);
-            while (counter <= 1000)
+            while (counter <= data.Time)
             {
 
                 for(int k = 0; k < 5; k++)
@@ -90,17 +90,17 @@ namespace _571hw3
                         break; //No tasks available
                 }
 
-                int nextArrival = priorityArray[0].nextArrival;
-                for (int j = 1; j < 5; j++)
+                int nextArrival = data.Time;
+                for (int j = 0; j < 5; j++)
                 {
-                    if (nextArrival > priorityArray[j].nextArrival)
+                    if (nextArrival >= priorityArray[j].nextArrival && priorityArray[j].nextArrival > counter)
                         nextArrival = priorityArray[j].nextArrival;
                 }
                 int time;
-                if (priorityArray[i].remainingTime < nextArrival - counter)
-                    time = priorityArray[i].remainingTime;
-                else
+                if (priorityArray[i].remainingTime + counter > nextArrival && nextArrival > counter)
                     time = nextArrival - counter;
+                else
+                    time = priorityArray[i].remainingTime;
 
                 counter += time;
                 priorityArray[i].Execute(time);
