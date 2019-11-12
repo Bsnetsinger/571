@@ -10,6 +10,7 @@ public class Task
     public int remainingTime;
     public int periodCount;
     public int nextArrival;
+    bool missed;
 
     public Task(string LineIn)
     {
@@ -25,19 +26,31 @@ public class Task
         remainingTime = wcet1188;
         periodCount = 0;
         nextArrival = 0;
+        missed = false;
     }
     public void CurrentTime(int Time)
     {
+        if (missed)
+        {
+            return;
+        }
+
         if ((periodCount + 1) * period == Time) //Begin new period, task re-enters the system
         {
             periodCount++;
             remainingTime = wcet1188; //Reset execution time
         }
-               
+
         if (remainingTime > 0 && Time >= (periodCount * period)) //Has not been fully executed and task is in the system
             available = true;
         else
             available = false;
+
+        if (remainingTime > 0 && Time >= (periodCount + 1) * period) //Has not been fully executed and deadline missed
+        {
+            Console.WriteLine("{0} deadline missed", this.name);
+            missed = true;
+        }
     }
     public void Execute(int time)
     {

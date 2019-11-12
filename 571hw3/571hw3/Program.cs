@@ -76,6 +76,8 @@ namespace _571hw3
             Task[] priorityArray = LowestPeriod(taskArray);
             while (counter <= data.Time)
             {
+                bool idle = false;
+                string processName;
 
                 for(int k = 0; k < 5; k++)
                 {
@@ -87,7 +89,10 @@ namespace _571hw3
                 {
                     i++;
                     if (i == 5)
-                        break; //No tasks available
+                    {
+                        idle = true;
+                        break;
+                    }
                 }
 
                 int nextArrival = data.Time;
@@ -96,16 +101,32 @@ namespace _571hw3
                     if (nextArrival >= priorityArray[j].nextArrival && priorityArray[j].nextArrival > counter)
                         nextArrival = priorityArray[j].nextArrival;
                 }
-                int time;
-                if (priorityArray[i].remainingTime + counter > nextArrival && nextArrival > counter)
-                    time = nextArrival - counter;
-                else
-                    time = priorityArray[i].remainingTime;
 
+                int time;
+                if (idle)
+                {
+                    time = nextArrival - counter;
+                }
+                else
+                {
+                    if (priorityArray[i].remainingTime + counter > nextArrival && nextArrival > counter)
+                        time = nextArrival - counter;
+                    else
+                        time = priorityArray[i].remainingTime;
+                }
+                
                 counter += time;
-                priorityArray[i].Execute(time);
-                Console.WriteLine("{0}", time);
-                Console.WriteLine("{0} {1} {2} {3}", counter - time, priorityArray[i].name, 1188, time);
+
+                if (idle)
+                    processName = "IDLE";
+                else
+                {
+                    processName = priorityArray[i].name;
+                    priorityArray[i].Execute(time);
+                }
+
+
+                Console.WriteLine("{0} {1} {2} {3}", counter - time, processName, 1188, time);
             }
 
             Console.WriteLine("RM selected");
