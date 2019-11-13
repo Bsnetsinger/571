@@ -11,6 +11,7 @@ public class Task
     public int periodCount;
     public int nextArrival;
     bool missed;
+    public int freq;
 
     public Task(string LineIn)
     {
@@ -27,7 +28,9 @@ public class Task
         periodCount = 0;
         nextArrival = period;
         missed = false;
+        freq = 1188;
     }
+
     public void CurrentTime(int Time)
     {
         if (missed)
@@ -45,7 +48,24 @@ public class Task
             }
             else
             {
-                remainingTime = wcet1188;
+                switch (freq)
+                {
+                    case 1188:
+                        remainingTime = wcet1188;
+                        break;
+                    case 918:
+                        remainingTime = wcet918;
+                        break;
+                    case 648:
+                        remainingTime = wcet648;
+                        break;
+                    case 384:
+                        remainingTime = wcet384;
+                        break;
+                    default:
+                        remainingTime = wcet1188;
+                        break;
+                }
             }
         }
         if(Time < nextArrival && remainingTime > 0)

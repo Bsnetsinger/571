@@ -148,6 +148,31 @@ namespace _571hw3
         static void EDF(Task[] taskArray, Data data, string EE)
         {
             Console.WriteLine("EDF selected");
+            int freq = EDFtest(taskArray, data);
+
+            //Set freq for tasks
+            for (int l = 0; l < 5; l++)
+            {
+                taskArray[l].freq = freq;
+                switch (freq)
+                {
+                    case 1188:
+                        taskArray[l].remainingTime = taskArray[l].wcet1188;
+                        break;
+                    case 918:
+                        taskArray[l].remainingTime = taskArray[l].wcet918;
+                        break;
+                    case 648:
+                        taskArray[l].remainingTime = taskArray[l].wcet648;
+                        break;
+                    case 384:
+                        taskArray[l].remainingTime = taskArray[l].wcet384;
+                        break;
+                    default:
+                        taskArray[l].remainingTime = taskArray[l].wcet1188;
+                        break;
+                }
+            }
 
             int counter = 0;
             while (counter <= data.Time)
