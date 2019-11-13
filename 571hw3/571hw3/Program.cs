@@ -38,7 +38,7 @@ namespace _571hw3
             }
             else if(Input == "input2.txt")
             {
-                System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input2.txt");
+                System.IO.StreamReader file = new System.IO.StreamReader(@"C: \Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\input2.txt");
                 for (i = 0; i < 6; i++)
                 {
                     line[i] = file.ReadLine();
@@ -72,6 +72,9 @@ namespace _571hw3
 
         static void RM(Task[] taskArray, Data data, string EE)
         {
+
+            Console.WriteLine("RM selected");
+
             int counter = 0;
             Task[] priorityArray = LowestPeriod(taskArray);
             while (counter <= data.Time)
@@ -84,11 +87,11 @@ namespace _571hw3
                     priorityArray[k].CurrentTime(counter); //If task arrived, resets remaining time and becomes available 
                 }
 
-                int i = 0; //Set to index of available task w/ highest priority
-                while (!(priorityArray[i].available))
+                int availableHiPriority = 0; //Set to index of available task w/ highest priority
+                while (!(priorityArray[availableHiPriority].available))
                 {
-                    i++;
-                    if (i == 5)
+                    availableHiPriority++;
+                    if (availableHiPriority == 5)
                     {
                         idle = true;
                         break;
@@ -98,43 +101,116 @@ namespace _571hw3
                 int nextArrival = data.Time;
                 for (int j = 0; j < 5; j++)
                 {
-                    if (nextArrival >= priorityArray[j].nextArrival && priorityArray[j].nextArrival > counter)
+                    if (nextArrival > priorityArray[j].nextArrival && priorityArray[j].nextArrival > counter)
                         nextArrival = priorityArray[j].nextArrival;
                 }
 
                 int time;
+                double power;
+
                 if (idle)
                 {
                     time = nextArrival - counter;
                 }
                 else
                 {
-                    if (priorityArray[i].remainingTime + counter > nextArrival && nextArrival > counter)
+                    if (priorityArray[availableHiPriority].remainingTime + counter > nextArrival && nextArrival > counter)
                         time = nextArrival - counter;
                     else
-                        time = priorityArray[i].remainingTime;
+                        time = priorityArray[availableHiPriority].remainingTime;
                 }
                 
                 counter += time;
 
                 if (idle)
+                {
                     processName = "IDLE";
+                    power = time * data.pIdle / 1000.0;
+                }
                 else
                 {
-                    processName = priorityArray[i].name;
-                    priorityArray[i].Execute(time);
+                    processName = priorityArray[availableHiPriority].name;
+                    priorityArray[availableHiPriority].Execute(time);
+                    power = time * data.p1188 / 1000.0;
                 }
 
 
-                Console.WriteLine("{0} {1} {2} {3}", counter - time, processName, 1188, time);
+                Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, 1188, time, power.ToString());
             }
-
-            Console.WriteLine("RM selected");
             return;
         }
         static void EDF(Task[] taskArray, Data data, string EE)
         {
             Console.WriteLine("EDF selected");
+
+            int counter = 0;
+            while (counter <= data.Time)
+            {
+                bool idle = false;
+                string processName;
+
+                for (int k = 0; k < 5; k++)
+                {
+                    taskArray[k].CurrentTime(counter); //If task arrived, resets remaining time and becomes available 
+                }
+
+                int nextArrival = data.Time;
+                int nextTask = 0;
+
+                idle = true;
+                for (int j = 0; j < 5; j++)
+                {
+                    if (nextArrival >= taskArray[j].nextArrival && taskArray[j].nextArrival > counter )
+                    {
+                        nextArrival = taskArray[j].nextArrival;
+                    }
+                    if (taskArray[j].available)
+                    {
+                        idle = false;
+                    }
+                }
+                int nextDeadline = data.Time + data.Time;
+                for(int k = 0; k < 5; k++)
+                {
+                    if (nextDeadline >= taskArray[k].nextArrival && taskArray[k].available)
+                    {
+                        nextDeadline = taskArray[k].nextArrival;
+                        nextTask = k;
+                    }
+                }
+
+                int time;
+                double power;
+
+                if (idle)
+                {
+                    time = nextArrival - counter;
+                }
+                else
+                {
+                    if (taskArray[nextTask].remainingTime + counter > nextArrival && nextArrival > counter)
+                        time = nextArrival - counter;
+                    else
+                        time = taskArray[nextTask].remainingTime;
+                }
+
+                counter += time;
+
+                if (idle)
+                {
+                    processName = "IDLE";
+                    power = time * data.pIdle / 1000.0;
+                }
+                else
+                {
+                    processName = taskArray[nextTask].name;
+                    taskArray[nextTask].Execute(time);
+                    power = time * data.p1188 / 1000.0;
+                }
+
+
+                 Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, 1188, time, power.ToString());
+            }
             return;
         }
 

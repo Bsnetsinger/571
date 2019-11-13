@@ -25,7 +25,7 @@ public class Task
         available = true;
         remainingTime = wcet1188;
         periodCount = 0;
-        nextArrival = 0;
+        nextArrival = period;
         missed = false;
     }
     public void CurrentTime(int Time)
@@ -35,6 +35,28 @@ public class Task
             return;
         }
 
+        if (Time >= nextArrival)
+        {
+            nextArrival += period;
+            if(remainingTime > 0)
+            {
+                Console.WriteLine("Deadline for task {0} missed.", this.name);
+                missed = true;
+            }
+            else
+            {
+                remainingTime = wcet1188;
+            }
+        }
+        if(Time < nextArrival && remainingTime > 0)
+        {
+            available = true;
+        }
+        else
+        {
+            available = false;
+        }
+        /*
         if ((periodCount + 1) * period == Time) //Begin new period, task re-enters the system
         {
             periodCount++;
@@ -51,6 +73,7 @@ public class Task
             Console.WriteLine("{0} deadline missed", this.name);
             missed = true;
         }
+        */
     }
     public void Execute(int time)
     {
@@ -59,7 +82,6 @@ public class Task
 
         if (remainingTime == 0) //Once current task completed, calculate next arrival
         {
-            nextArrival += period;
             available = false;
         }
     }
