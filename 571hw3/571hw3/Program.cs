@@ -76,51 +76,57 @@ namespace _571hw3
             Console.WriteLine("RM selected");
 
             int counter = 0;
-            Task[] priorityArray = LowestPeriod(taskArray);
+
+            Task[] priorityArray = LowestPeriod(taskArray); //Sort tasks by priority
+
+
             while (counter <= data.Time)
             {
                 bool idle = false;
                 string processName;
+                int time;
+                double power;
+                int availableHiPriority = 0; //Set to index of available task w/ highest priority
+                int nextArrival = data.Time;
 
-                for(int k = 0; k < 5; k++)
+                //At decision, update all tasks availability and next arrival
+                for (int k = 0; k < 5; k++)
                 {
                     priorityArray[k].CurrentTime(counter); //If task arrived, resets remaining time and becomes available 
                 }
 
-                int availableHiPriority = 0; //Set to index of available task w/ highest priority
+                //Set availableHiPriority to index of highest priority task that is available
                 while (!(priorityArray[availableHiPriority].available))
                 {
                     availableHiPriority++;
-                    if (availableHiPriority == 5)
+                    if (availableHiPriority == 5) //No tasks are available, set idle
                     {
-                        idle = true;
+                        idle = true; 
                         break;
                     }
                 }
 
-                int nextArrival = data.Time;
+                //Set next arrival to time next task arrives
                 for (int j = 0; j < 5; j++)
                 {
                     if (nextArrival > priorityArray[j].nextArrival && priorityArray[j].nextArrival > counter)
                         nextArrival = priorityArray[j].nextArrival;
                 }
 
-                int time;
-                double power;
 
                 if (idle)
                 {
-                    time = nextArrival - counter;
+                    time = nextArrival - counter; //Run idle until next arrival
                 }
                 else
                 {
-                    if (priorityArray[availableHiPriority].remainingTime + counter > nextArrival && nextArrival > counter)
+                    if (priorityArray[availableHiPriority].remainingTime + counter > nextArrival && nextArrival > counter) //Next task arrives earlier than priority task would finish
                         time = nextArrival - counter;
-                    else
+                    else //Task completes without other tasks arriving
                         time = priorityArray[availableHiPriority].remainingTime;
                 }
                 
-                counter += time;
+                counter += time; 
 
                 if (idle)
                 {
@@ -146,30 +152,34 @@ namespace _571hw3
             int counter = 0;
             while (counter <= data.Time)
             {
-                bool idle = false;
+                bool idle = true;
                 string processName;
+                int time;
+                double power;
+                int nextArrival = data.Time;
+                int nextTask = 0;
+                int nextDeadline = data.Time + data.Time; //Must be far enough so it won't be earlier than other deadlines
 
+                //Update tasks at decision time for availability and next arrival
                 for (int k = 0; k < 5; k++)
                 {
                     taskArray[k].CurrentTime(counter); //If task arrived, resets remaining time and becomes available 
                 }
 
-                int nextArrival = data.Time;
-                int nextTask = 0;
-
-                idle = true;
+                //Find next arrival time
                 for (int j = 0; j < 5; j++)
                 {
                     if (nextArrival >= taskArray[j].nextArrival && taskArray[j].nextArrival > counter )
                     {
-                        nextArrival = taskArray[j].nextArrival;
+                        nextArrival = taskArray[j].nextArrival; 
                     }
-                    if (taskArray[j].available)
+                    if (taskArray[j].available) //If any tasks are available, system not idle
                     {
                         idle = false;
                     }
                 }
-                int nextDeadline = data.Time + data.Time;
+
+                //Find next deadline of the system from all available tasks, save index to nextTask
                 for(int k = 0; k < 5; k++)
                 {
                     if (nextDeadline >= taskArray[k].nextArrival && taskArray[k].available)
@@ -179,19 +189,16 @@ namespace _571hw3
                     }
                 }
 
-                int time;
-                double power;
-
                 if (idle)
                 {
-                    time = nextArrival - counter;
+                    time = nextArrival - counter; //Run until next arrival
                 }
                 else
                 {
-                    if (taskArray[nextTask].remainingTime + counter > nextArrival && nextArrival > counter)
+                    if (taskArray[nextTask].remainingTime + counter > nextArrival && nextArrival > counter) //Run until next arrival
                         time = nextArrival - counter;
                     else
-                        time = taskArray[nextTask].remainingTime;
+                        time = taskArray[nextTask].remainingTime; //Run until task completes
                 }
 
                 counter += time;
