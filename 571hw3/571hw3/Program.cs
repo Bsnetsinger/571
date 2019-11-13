@@ -239,5 +239,40 @@ namespace _571hw3
             }
             return newTaskArray;
         }
+
+        static int EDFtest(Task[] taskArray, Data data)
+        {
+            double test;
+
+            test = (taskArray[0].wcet384 / taskArray[0].period) + (taskArray[1].wcet384 / taskArray[1].period)
+                 + (taskArray[2].wcet384 / taskArray[2].period) + (taskArray[3].wcet384 / taskArray[3].period)
+                 + (taskArray[4].wcet384 / taskArray[4].period);
+
+            if (test <= 1)
+                return 384;
+
+            test = (taskArray[0].wcet648 / taskArray[0].period) + (taskArray[1].wcet648 / taskArray[1].period)
+                 + (taskArray[2].wcet648 / taskArray[2].period) + (taskArray[3].wcet648 / taskArray[3].period)
+                 + (taskArray[4].wcet648 / taskArray[4].period);
+
+            if (test <= 1)
+                return 648;
+
+            test = (taskArray[0].wcet918 / taskArray[0].period) + (taskArray[1].wcet918 / taskArray[1].period)
+                 + (taskArray[2].wcet918 / taskArray[2].period) + (taskArray[3].wcet918 / taskArray[3].period)
+                 + (taskArray[4].wcet918 / taskArray[4].period);
+
+            if (test <= 1)
+                return 918;
+              
+            test = (taskArray[0].wcet1188 / taskArray[0].period) + (taskArray[1].wcet1188 / taskArray[1].period)
+                 + (taskArray[2].wcet1188 / taskArray[2].period) + (taskArray[3].wcet1188 / taskArray[3].period)
+                 + (taskArray[4].wcet1188 / taskArray[4].period);
+
+            if (test <= 1)
+                return 1188;
+            else
+                return 0;
+        }
     }
 }
