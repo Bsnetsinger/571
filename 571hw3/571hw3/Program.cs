@@ -269,30 +269,51 @@ namespace _571hw3
         {
             double test;
 
-            test = (taskArray[0].wcet384 / taskArray[0].period) + (taskArray[1].wcet384 / taskArray[1].period)
-                 + (taskArray[2].wcet384 / taskArray[2].period) + (taskArray[3].wcet384 / taskArray[3].period)
-                 + (taskArray[4].wcet384 / taskArray[4].period);
+            double wcet384_0 = Convert.ToDouble(taskArray[0].wcet384);
+            double wcet648_0 = Convert.ToDouble(taskArray[0].wcet648);
+            double wcet918_0 = Convert.ToDouble(taskArray[0].wcet918);
+            double wcet1188_0 = Convert.ToDouble(taskArray[0].wcet1188);
+            double wcet384_1 = Convert.ToDouble(taskArray[1].wcet384);
+            double wcet648_1 = Convert.ToDouble(taskArray[1].wcet648);
+            double wcet918_1 = Convert.ToDouble(taskArray[1].wcet918);
+            double wcet1188_1 = Convert.ToDouble(taskArray[1].wcet1188);
+            double wcet384_2 = Convert.ToDouble(taskArray[2].wcet384);
+            double wcet648_2 = Convert.ToDouble(taskArray[2].wcet648);
+            double wcet918_2 = Convert.ToDouble(taskArray[2].wcet918);
+            double wcet1188_2 = Convert.ToDouble(taskArray[2].wcet1188);
+            double wcet384_3 = Convert.ToDouble(taskArray[3].wcet384);
+            double wcet648_3 = Convert.ToDouble(taskArray[3].wcet648);
+            double wcet918_3 = Convert.ToDouble(taskArray[3].wcet918);
+            double wcet1188_3 = Convert.ToDouble(taskArray[3].wcet1188);
+            double wcet384_4 = Convert.ToDouble(taskArray[4].wcet384);
+            double wcet648_4 = Convert.ToDouble(taskArray[4].wcet648);
+            double wcet918_4 = Convert.ToDouble(taskArray[4].wcet918);
+            double wcet1188_4 = Convert.ToDouble(taskArray[4].wcet1188);
 
+            test = (wcet384_0 / Convert.ToDouble(taskArray[0].period)) + (wcet384_0 / Convert.ToDouble(taskArray[1].period))
+                 + (wcet384_2 / Convert.ToDouble(taskArray[2].period)) + (wcet384_3 / Convert.ToDouble(taskArray[3].period))
+                 + (wcet384_4 / Convert.ToDouble(taskArray[4].period));
+            Console.WriteLine("{0}",test);
             if (test <= 1)
                 return 384;
 
-            test = (taskArray[0].wcet648 / taskArray[0].period) + (taskArray[1].wcet648 / taskArray[1].period)
-                 + (taskArray[2].wcet648 / taskArray[2].period) + (taskArray[3].wcet648 / taskArray[3].period)
-                 + (taskArray[4].wcet648 / taskArray[4].period);
+            test = (wcet648_0 / Convert.ToDouble(taskArray[0].period)) + (wcet648_0 / Convert.ToDouble(taskArray[1].period))
+                 + (wcet648_2 / Convert.ToDouble(taskArray[2].period)) + (wcet648_3 / Convert.ToDouble(taskArray[3].period))
+                 + (wcet648_4 / Convert.ToDouble(taskArray[4].period));
 
             if (test <= 1)
                 return 648;
 
-            test = (taskArray[0].wcet918 / taskArray[0].period) + (taskArray[1].wcet918 / taskArray[1].period)
-                 + (taskArray[2].wcet918 / taskArray[2].period) + (taskArray[3].wcet918 / taskArray[3].period)
-                 + (taskArray[4].wcet918 / taskArray[4].period);
+            test = (wcet918_0 / Convert.ToDouble(taskArray[0].period)) + (wcet918_0 / Convert.ToDouble(taskArray[1].period))
+                 + (wcet918_2 / Convert.ToDouble(taskArray[2].period)) + (wcet918_3 / Convert.ToDouble(taskArray[3].period))
+                 + (wcet918_4 / Convert.ToDouble(taskArray[4].period));
 
             if (test <= 1)
                 return 918;
-              
-            test = (taskArray[0].wcet1188 / taskArray[0].period) + (taskArray[1].wcet1188 / taskArray[1].period)
-                 + (taskArray[2].wcet1188 / taskArray[2].period) + (taskArray[3].wcet1188 / taskArray[3].period)
-                 + (taskArray[4].wcet1188 / taskArray[4].period);
+
+            test = (wcet1188_0 / Convert.ToDouble(taskArray[0].period)) + (wcet1188_0 / Convert.ToDouble(taskArray[1].period))
+                 + (wcet1188_2 / Convert.ToDouble(taskArray[2].period)) + (wcet1188_3 / Convert.ToDouble(taskArray[3].period))
+                 + (wcet1188_4 / Convert.ToDouble(taskArray[4].period));
 
             if (test <= 1)
                 return 1188;
