@@ -318,34 +318,7 @@ namespace _571hw3
                         }
                     }
                 }
-            }
-
-            int y;
-
-            if (type == "EDF")
-            {
-                while(!(EDFtest(taskArray, data)))
-                {
-                    for(int x=0; x<5; x++)
-                    {
-                        if(taskArray[x].exeIndex != 0)
-                        {
-                            taskArray[x].exeIndex -= 1;
-                            taskArray[x].exeTime = taskArray[x].execArray[taskArray[x].exeIndex];
-                        }
-                    }
-                }
-            }
-            else if (type == "RM")
-            {
-                while (!(RMtest(taskArray, data)))
-                {
-                    for (int x = 0; x < 5; x++)
-                    {
-                        y = taskArray[x].exeIndex;
-                        taskArray[x].exeTime = taskArray[x].execArray[y - 1];
-                    }
-                }
+                Console.WriteLine("{0}", taskArray[i].exeIndex);
             }
 
             return;
