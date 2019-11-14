@@ -30,7 +30,7 @@ namespace _571hw3
 
             if (Input == "input1.txt")
             {
-                System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\input1.txt");
+                System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input1.txt");
 
                 for (i = 0; i < 6; i++)
                 {
@@ -39,7 +39,7 @@ namespace _571hw3
             }
             else if(Input == "input2.txt")
             {
-                System.IO.StreamReader file = new System.IO.StreamReader(@"C: \Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\input2.txt");
+                System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input2.txt");
                 for (i = 0; i < 6; i++)
                 {
                     line[i] = file.ReadLine();
@@ -294,6 +294,29 @@ namespace _571hw3
                     }
                     power = taskArray[i].execArray[j] * data.powerArray[j];
                     taskArray[i].exeIndex = j;
+
+                }
+                if (type == "EDF")
+                {
+                    while (!(EDFtest(taskArray, data)))
+                    {
+                        if (taskArray[i].exeIndex != 0)
+                        {
+                            taskArray[i].exeIndex -= 1;
+                            taskArray[i].exeTime = taskArray[i].execArray[taskArray[i].exeIndex];
+                        }
+                    }
+                }
+                else if (type == "RM")
+                {
+                    while (!(RMtest(taskArray, data)))
+                    {
+                        if (taskArray[i].exeIndex != 0)
+                        {
+                            taskArray[i].exeIndex -= 1;
+                            taskArray[i].exeTime = taskArray[i].execArray[taskArray[i].exeIndex];
+                        }
+                    }
                 }
             }
 
@@ -305,8 +328,11 @@ namespace _571hw3
                 {
                     for(int x=0; x<5; x++)
                     {
-                        y = taskArray[x].exeIndex;
-                        taskArray[x].exeTime = taskArray[x].execArray[y - 1];
+                        if(taskArray[x].exeIndex != 0)
+                        {
+                            taskArray[x].exeIndex -= 1;
+                            taskArray[x].exeTime = taskArray[x].execArray[taskArray[x].exeIndex];
+                        }
                     }
                 }
             }
