@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace _571hw3
 {
+    
+
     class Program
     {
+        
         static void Main(string[] args)
         {
 
@@ -152,7 +157,7 @@ namespace _571hw3
 
             string type = "EDF";
 
-            SetBestFreq(taskArray, data, type);
+            taskArray = SetBestFreq(taskArray, data, type);
 
             int counter = 0;
             while (counter <= data.Time)
@@ -221,7 +226,7 @@ namespace _571hw3
                 }
 
 
-                 Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, 1188, time, power.ToString());
+                 Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, taskArray[nextTask].freq, time, power.ToString());
             }
             return;
         }
@@ -278,8 +283,9 @@ namespace _571hw3
             else
                 return false;
         }
-        static void SetBestFreq(Task[] taskArray, Data data, string type)
+        static Task[] SetBestFreq(Task[] taskArray, Data data, string type)
         {
+            int[] freqArray = new int[] { 1188, 918, 648, 384 };
             int power;
             int[] worthEE = new int[5]; //Holds index of smallest worthy frequency (0 = 1188, 1 = 918, ...)
 
@@ -318,10 +324,13 @@ namespace _571hw3
                         }
                     }
                 }
+                taskArray[i].freq = freqArray[taskArray[i].exeIndex];
+
+
                 Console.WriteLine("{0}", taskArray[i].exeIndex);
             }
 
-            return;
+            return taskArray;
 
         }
     }
