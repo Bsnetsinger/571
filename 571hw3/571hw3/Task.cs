@@ -12,6 +12,7 @@ public class Task
     public int nextArrival;
     bool missed;
     public int freq;
+    public int exeTime;
 
     public Task(string LineIn)
     {
@@ -29,6 +30,8 @@ public class Task
         nextArrival = period;
         missed = false;
         freq = 1188;
+        exeTime = wcet1188;
+        
     }
 
     public void CurrentTime(int Time)
