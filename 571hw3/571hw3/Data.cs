@@ -9,6 +9,7 @@ namespace _571hw3
     public class Data
     {
         public int Number, Time, p1188, p918, p648, p384, pIdle;
+        public int[] powerArray = new int[5];
 
         public Data(string LineIn)
         {
@@ -20,6 +21,8 @@ namespace _571hw3
             p648 = Convert.ToInt32(values[4]);
             p384 = Convert.ToInt32(values[5]);
             pIdle = Convert.ToInt32(values[6]);
+
+            powerArray = new int[] { p1188, p918, p648, p384, pIdle };
         }
     }
 }

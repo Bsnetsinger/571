@@ -10,6 +10,7 @@ namespace _571hw3
     {
         static void Main(string[] args)
         {
+
             string Input;
             string Type;
             string Energy;
@@ -148,31 +149,8 @@ namespace _571hw3
         static void EDF(Task[] taskArray, Data data, string EE)
         {
             Console.WriteLine("EDF selected");
-            int freq = EDFtest(taskArray, data);
 
-            //Set freq for tasks
-            for (int l = 0; l < 5; l++)
-            {
-                taskArray[l].freq = freq;
-                switch (freq)
-                {
-                    case 1188:
-                        taskArray[l].remainingTime = taskArray[l].wcet1188;
-                        break;
-                    case 918:
-                        taskArray[l].remainingTime = taskArray[l].wcet918;
-                        break;
-                    case 648:
-                        taskArray[l].remainingTime = taskArray[l].wcet648;
-                        break;
-                    case 384:
-                        taskArray[l].remainingTime = taskArray[l].wcet384;
-                        break;
-                    default:
-                        taskArray[l].remainingTime = taskArray[l].wcet1188;
-                        break;
-                }
-            }
+            SetBestFreq(taskArray, data);
 
             int counter = 0;
             while (counter <= data.Time)
@@ -298,7 +276,27 @@ namespace _571hw3
             else
                 return false;
         }
+        static void SetBestFreq(Task[] taskArray, Data data)
+        {
+            int power;
+            int[] worthEE = new int[5]; //Holds index of smallest worthy frequency (0 = 1188, 1 = 918, ...)
+
+            for(int i = 0; i < 5; i++)
+            {
+                power = taskArray[i].execArray[0] * data.powerArray[0];
+                for(int j = 1; j < 4; j++)
+                {
+                    if(power>(taskArray[i].execArray[j] * data.powerArray[j]))
+                    {
+                        taskArray[i].exeTime = taskArray[i].execArray[j];
+                    }
+                    power = taskArray[i].execArray[j] * data.powerArray[j];
+                }
+            }
+
+        }
     }
+
 }
 
 
