@@ -13,6 +13,7 @@ public class Task
     bool missed;
     public int freq;
     public int exeTime;
+    public int exeIndex;
 
     public Task(string LineIn)
     {
@@ -32,6 +33,7 @@ public class Task
         missed = false;
         freq = 1188;
         exeTime = wcet1188;
+        exeIndex = 0;
         
     }
 

@@ -150,7 +150,9 @@ namespace _571hw3
         {
             Console.WriteLine("EDF selected");
 
-            SetBestFreq(taskArray, data);
+            string type = "EDF";
+
+            SetBestFreq(taskArray, data, type);
 
             int counter = 0;
             while (counter <= data.Time)
@@ -276,7 +278,7 @@ namespace _571hw3
             else
                 return false;
         }
-        static void SetBestFreq(Task[] taskArray, Data data)
+        static void SetBestFreq(Task[] taskArray, Data data, string type)
         {
             int power;
             int[] worthEE = new int[5]; //Holds index of smallest worthy frequency (0 = 1188, 1 = 918, ...)
@@ -291,8 +293,36 @@ namespace _571hw3
                         taskArray[i].exeTime = taskArray[i].execArray[j];
                     }
                     power = taskArray[i].execArray[j] * data.powerArray[j];
+                    taskArray[i].exeIndex = j;
                 }
             }
+
+            int y;
+
+            if (type == "EDF")
+            {
+                while(!(EDFtest(taskArray, data)))
+                {
+                    for(int x=0; x<5; x++)
+                    {
+                        y = taskArray[x].exeIndex;
+                        taskArray[x].exeTime = taskArray[x].execArray[y - 1];
+                    }
+                }
+            }
+            else if (type == "RM")
+            {
+                while (!(RMtest(taskArray, data)))
+                {
+                    for (int x = 0; x < 5; x++)
+                    {
+                        y = taskArray[x].exeIndex;
+                        taskArray[x].exeTime = taskArray[x].execArray[y - 1];
+                    }
+                }
+            }
+
+            return;
 
         }
     }
