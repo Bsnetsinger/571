@@ -74,6 +74,7 @@ namespace _571hw3
                     RM(taskArray, data, Energy);
                 }
 
+                
                 Console.ReadKey();
                 Console.WriteLine("");
             }
@@ -87,6 +88,9 @@ namespace _571hw3
             Console.WriteLine("RM selected");
 
             int counter = 0;
+            double idleTime = 0;
+            double totalPower = 0;
+
 
             Task[] priorityArray = LowestPeriod(taskArray); //Sort tasks by priority
 
@@ -152,6 +156,7 @@ namespace _571hw3
                 {
                     processName = "IDLE";
                     power = time * data.pIdle / 1000.0;
+                    idleTime += time;
                 }
                 else
                 {
@@ -160,14 +165,24 @@ namespace _571hw3
                     power = time * data.p1188 / 1000.0;
                 }
 
+                totalPower += power;
+
 
                 Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, 1188, time, power.ToString());
             }
+
+            double y = (idleTime) / 1000;
+
+            Console.WriteLine("Total Energy:{0}J, Idle Percentage: {1}%, Total Execution Time: 1000", totalPower, y );
+
             return;
         }
         static void EDF(Task[] taskArray, Data data, string EE)
         {
             Console.WriteLine("EDF selected");
+
+            double idleTime = 0;
+            double totalPower = 0;
 
             string type = "EDF";
 
@@ -234,6 +249,7 @@ namespace _571hw3
                 {
                     processName = "IDLE";
                     power = time * data.pIdle / 1000.0;
+                    idleTime += time;
                 }
                 else
                 {
@@ -242,9 +258,15 @@ namespace _571hw3
                     power = time * data.p1188 / 1000.0;
                 }
 
+                totalPower += power;
 
                  Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, taskArray[nextTask].freq, time, power.ToString());
             }
+
+            double y = (idleTime) / 1000;
+
+            Console.WriteLine("Total Energy:{0}J, Idle Percentage: {1}%, Total Execution Time: 1000", totalPower, y*100);
+
             return;
         }
 
@@ -359,25 +381,3 @@ namespace _571hw3
 }
 
 
-
-
-//double wcet384_0 = Convert.ToDouble(taskArray[0].wcet384);
-//double wcet648_0 = Convert.ToDouble(taskArray[0].wcet648);
-//double wcet918_0 = Convert.ToDouble(taskArray[0].wcet918);
-//double wcet1188_0 = Convert.ToDouble(taskArray[0].wcet1188);
-//double wcet384_1 = Convert.ToDouble(taskArray[1].wcet384);
-//double wcet648_1 = Convert.ToDouble(taskArray[1].wcet648);
-//double wcet918_1 = Convert.ToDouble(taskArray[1].wcet918);
-//double wcet1188_1 = Convert.ToDouble(taskArray[1].wcet1188);
-//double wcet384_2 = Convert.ToDouble(taskArray[2].wcet384);
-//double wcet648_2 = Convert.ToDouble(taskArray[2].wcet648);
-//double wcet918_2 = Convert.ToDouble(taskArray[2].wcet918);
-//double wcet1188_2 = Convert.ToDouble(taskArray[2].wcet1188);
-//double wcet384_3 = Convert.ToDouble(taskArray[3].wcet384);
-//double wcet648_3 = Convert.ToDouble(taskArray[3].wcet648);
-//double wcet918_3 = Convert.ToDouble(taskArray[3].wcet918);
-//double wcet1188_3 = Convert.ToDouble(taskArray[3].wcet1188);
-//double wcet384_4 = Convert.ToDouble(taskArray[4].wcet384);
-//double wcet648_4 = Convert.ToDouble(taskArray[4].wcet648);
-//double wcet918_4 = Convert.ToDouble(taskArray[4].wcet918);
-//double wcet1188_4 = Convert.ToDouble(taskArray[4].wcet1188);
