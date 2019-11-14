@@ -75,7 +75,7 @@ namespace _571hw3
                 }
 
                 
-                Console.ReadKey();
+
                 Console.WriteLine("");
             }
             
@@ -173,7 +173,7 @@ namespace _571hw3
 
             double y = (idleTime) / 1000;
 
-            Console.WriteLine("Total Energy:{0}J, Idle Percentage: {1}%, Total Execution Time: 1000", totalPower, y );
+            Console.WriteLine("Total Energy:{0}J, Idle Percentage: {1}%, Total Execution Time: {2}", totalPower, y * 100, 1000 - idleTime);
 
             return;
         }
@@ -265,7 +265,7 @@ namespace _571hw3
 
             double y = (idleTime) / 1000;
 
-            Console.WriteLine("Total Energy:{0}J, Idle Percentage: {1}%, Total Execution Time: 1000", totalPower, y*100);
+            Console.WriteLine("Total Energy:{0}J, Idle Percentage: {1}%, Total Execution Time: {2}", totalPower, y*100, 1000 - idleTime);
 
             return;
         }
@@ -297,7 +297,7 @@ namespace _571hw3
                  + (Convert.ToDouble(taskArray[2].exeTime) / Convert.ToDouble(taskArray[2].period)) + (Convert.ToDouble(taskArray[3].exeTime) / Convert.ToDouble(taskArray[3].period))
                  + (Convert.ToDouble(taskArray[4].exeTime) / Convert.ToDouble(taskArray[4].period));
 
-            Console.WriteLine("{0}",test);
+           // Console.WriteLine("{0}",test);
 
             if (test <= 1)
                 return true;
@@ -315,7 +315,7 @@ namespace _571hw3
                  + (Convert.ToDouble(taskArray[2].exeTime) / Convert.ToDouble(taskArray[2].period)) + (Convert.ToDouble(taskArray[3].exeTime) / Convert.ToDouble(taskArray[3].period))
                  + (Convert.ToDouble(taskArray[4].exeTime) / Convert.ToDouble(taskArray[4].period));
 
-            Console.WriteLine("{0}", test);
+           // Console.WriteLine("{0}", test);
 
             if (test <= RM)
                 return true;
@@ -356,7 +356,7 @@ namespace _571hw3
                 {
                     while (!(RMtest(taskArray, data)))
                     {
-                        if(taskArray[i].exeIndex == 0)
+                        if (taskArray[i].exeIndex == 0)
                         {
                             break;
                         }
@@ -369,9 +369,44 @@ namespace _571hw3
                 }
                 taskArray[i].freq = freqArray[taskArray[i].exeIndex];
 
-
-                Console.WriteLine("{0}", taskArray[i].exeIndex);
             }
+            //if (type == "EDF")
+            //{
+            //    while (!(EDFtest(taskArray, data)))
+            //    {   
+            //        for(int i=0; i<5; i++)
+            //        {
+            //            if (taskArray[i].exeIndex == 0)
+            //            {
+            //                break;
+            //            }
+            //            if (taskArray[i].exeIndex != 0)
+            //            {
+            //                taskArray[i].exeIndex -= 1;
+            //                taskArray[i].exeTime = taskArray[i].execArray[taskArray[i].exeIndex];
+            //            }
+            //        }
+
+            //    }
+            //}
+            //else if (type == "RM")
+            //{
+            //    while (!(RMtest(taskArray, data)))
+            //    {
+            //        for (int i = 0; i < 5; i++)
+            //        {
+            //            if (taskArray[i].exeIndex == 0)
+            //            {
+            //                break;
+            //            }
+            //            if (taskArray[i].exeIndex != 0)
+            //            {
+            //                taskArray[i].exeIndex -= 1;
+            //                taskArray[i].exeTime = taskArray[i].execArray[taskArray[i].exeIndex];
+            //            }
+            //        }
+            //    }
+            //}
 
             return taskArray;
 
