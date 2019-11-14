@@ -15,64 +15,69 @@ namespace _571hw3
         
         static void Main(string[] args)
         {
-
-            string Input;
-            string Type;
-            string Energy;
-
-            Console.WriteLine("Input file name: ");
-            Input = Console.ReadLine();
-            Console.WriteLine("RM or EDF: ");
-            Type = Console.ReadLine();
-            Console.WriteLine("EE or N/A: ");
-            Energy = Console.ReadLine();
-
-            //-------------------------------------------------------------------------------------------------------------------------------------------
-            //Reading Files / Constructing Objects
-
-            string[] line = new string[6];
-            int i;
-
-            if (Input == "input1.txt")
+            while(true)
             {
-                System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input1.txt");
+                string Input;
+                string Type;
+                string Energy;
 
-                for (i = 0; i < 6; i++)
-                {
-                    line[i] = file.ReadLine();
-                }
-            }
-            else if(Input == "input2.txt")
-            {
-                System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input2.txt");
-                for (i = 0; i < 6; i++)
-                {
-                    line[i] = file.ReadLine();
-                }
-            }
 
-            Data data = new Data(line[0]);
-            Task[] taskArray = new Task[5];
-            taskArray[0] = new Task(line[1]);
-            taskArray[1] = new Task(line[2]);
-            taskArray[2] = new Task(line[3]);
-            taskArray[3] = new Task(line[4]);
-            taskArray[4] = new Task(line[5]);
+                Console.WriteLine("Input file name: ");
+                Input = Console.ReadLine();
+                Console.WriteLine("RM or EDF: ");
+                Type = Console.ReadLine();
+                Console.WriteLine("EE or N/A: ");
+                Energy = Console.ReadLine();
+
+                //-------------------------------------------------------------------------------------------------------------------------------------------
+                //Reading Files / Constructing Objects
+
+                string[] line = new string[6];
+                int i;
+
+                if (Input == "input1.txt")
+                {
+                    System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input1.txt");
+
+                    for (i = 0; i < 6; i++)
+                    {
+                        line[i] = file.ReadLine();
+                    }
+                }
+                else if (Input == "input2.txt")
+                {
+                    System.IO.StreamReader file = new System.IO.StreamReader(@"E:\VScode\571\571hw3\571hw3\input2.txt");
+                    for (i = 0; i < 6; i++)
+                    {
+                        line[i] = file.ReadLine();
+                    }
+                }
+
+                Data data = new Data(line[0]);
+                Task[] taskArray = new Task[5];
+                taskArray[0] = new Task(line[1]);
+                taskArray[1] = new Task(line[2]);
+                taskArray[2] = new Task(line[3]);
+                taskArray[3] = new Task(line[4]);
+                taskArray[4] = new Task(line[5]);
+
+
+                //--------------------------------------------------------------------------------------------------------------------------------------
+                //Schedule Algorithms
+
+                if (Type == "EDF")
+                {
+                    EDF(taskArray, data, Energy);
+                }
+                else if (Type == "RM")
+                {
+                    RM(taskArray, data, Energy);
+                }
+
+                Console.ReadKey();
+                Console.WriteLine("");
+            }
             
-
-            //--------------------------------------------------------------------------------------------------------------------------------------
-            //Schedule Algorithms
-
-            if(Type == "EDF")
-            {
-                EDF(taskArray, data, Energy);
-            }
-            else if(Type == "RM")
-            {
-                RM(taskArray, data, Energy);
-            }
-
-            Console.ReadKey();
 
         }
 
