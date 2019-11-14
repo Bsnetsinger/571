@@ -22,7 +22,7 @@ namespace _571hw3
 
             Console.WriteLine("Input file name: ");
             Input = Console.ReadLine();
-            Console.WriteLine("Scheduling type: ");
+            Console.WriteLine("RM or EDF: ");
             Type = Console.ReadLine();
             Console.WriteLine("EE or N/A: ");
             Energy = Console.ReadLine();
@@ -85,6 +85,13 @@ namespace _571hw3
 
             Task[] priorityArray = LowestPeriod(taskArray); //Sort tasks by priority
 
+            string type = "RM";
+
+            if(EE == "EE")
+            {
+                taskArray = SetBestFreq(taskArray, data, type);
+            }
+
 
             while (counter <= data.Time)
             {
@@ -94,6 +101,8 @@ namespace _571hw3
                 double power;
                 int availableHiPriority = 0; //Set to index of available task w/ highest priority
                 int nextArrival = data.Time;
+
+
 
                 //At decision, update all tasks availability and next arrival
                 for (int k = 0; k < 5; k++)
@@ -157,7 +166,10 @@ namespace _571hw3
 
             string type = "EDF";
 
-            taskArray = SetBestFreq(taskArray, data, type);
+            if (EE == "EE")
+            {
+                taskArray = SetBestFreq(taskArray, data, type);
+            }
 
             int counter = 0;
             while (counter <= data.Time)
@@ -297,9 +309,9 @@ namespace _571hw3
                     if(power>(taskArray[i].execArray[j] * data.powerArray[j]))
                     {
                         taskArray[i].exeTime = taskArray[i].execArray[j];
+                        taskArray[i].exeIndex = j;
                     }
                     power = taskArray[i].execArray[j] * data.powerArray[j];
-                    taskArray[i].exeIndex = j;
 
                 }
                 if (type == "EDF")
@@ -317,6 +329,10 @@ namespace _571hw3
                 {
                     while (!(RMtest(taskArray, data)))
                     {
+                        if(taskArray[i].exeIndex == 0)
+                        {
+                            break;
+                        }
                         if (taskArray[i].exeIndex != 0)
                         {
                             taskArray[i].exeIndex -= 1;
