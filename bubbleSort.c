@@ -36,7 +36,8 @@ int main()
 
 	int runTime = end - start;
 
-	file = fopen("/home/pi/Desktop/bubbleSortTimes.txt", "a");
+	FILE * f;
+	f = fopen("/home/pi/Desktop/bubbleSortTimes.txt", "a");
 	fprintf(file, "%d", runTime);
 
     return 0;
