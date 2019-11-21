@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "571hw3", "571hw3\571hw3.csproj", "{172D4E5C-1BCB-428A-9D41-07104195EAA3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E863E414-C957-44E9-BDD0-C6D2620F59BC}"
+	ProjectSection(SolutionItems) = preProject
+		571hw3\input1.txt = 571hw3\input1.txt
+		571hw3\input2.txt = 571hw3\input2.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

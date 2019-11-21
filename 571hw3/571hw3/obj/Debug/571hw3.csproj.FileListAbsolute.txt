@@ -5,6 +5,7 @@ E:\VScode\571\571hw3\571hw3\obj\Debug\571hw3.csprojAssemblyReference.cache
 E:\VScode\571\571hw3\571hw3\obj\Debug\571hw3.csproj.CoreCompileInputs.cache
 E:\VScode\571\571hw3\571hw3\obj\Debug\571hw3.exe
 E:\VScode\571\571hw3\571hw3\obj\Debug\571hw3.pdb
+<<<<<<< Updated upstream
 C:\Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\bin\Debug\571hw3.exe.config
 C:\Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\bin\Debug\571hw3.exe
 C:\Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\bin\Debug\571hw3.pdb
@@ -12,3 +13,7 @@ C:\Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\obj\Debug\571hw3.csprojAss
 C:\Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\obj\Debug\571hw3.csproj.CoreCompileInputs.cache
 C:\Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\obj\Debug\571hw3.exe
 C:\Users\micha\OneDrive\Desktop\571\571\571hw3\571hw3\obj\Debug\571hw3.pdb
+=======
+C:\Users\Michael\AppData\Local\Programs\Microsoft VS Code\571\571\571\571hw3\571hw3\obj\Debug\571hw3.exe
+C:\Users\Michael\AppData\Local\Programs\Microsoft VS Code\571\571\571\571hw3\571hw3\obj\Debug\571hw3.pdb
+>>>>>>> Stashed changes
