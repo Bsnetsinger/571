@@ -45,7 +45,9 @@ int main()
 
 	FILE * f;
 	f = fopen("/home/pi/Desktop/bubbleSortTimes.txt", "a");
-	fprintf(f, "%f", total_t);
+	fprintf(f, "%f\n", total_t);
+	fprintf(f, "%f\n",CLOCKS_PER_SEC);
+	
 
     return 0;
 
