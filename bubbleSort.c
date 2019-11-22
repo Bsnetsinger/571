@@ -8,29 +8,34 @@ int main()
 	time(&start);
   
 
-    int A[10000000];
+    int A[1000];
 	srand(0);
 
 	int i;
 
-	for(i=0; i<10000000; i++)
-	{
-		A[i] = 1000 - i;
-	}
+    int size = 1000;
+	int loop = 0;
 
-    int size = 10000000;
-
-	for(int i=0; i<size; i++)
+	while(loop < 1000)
 	{
-		for(int j=0; j<size-1; j++)
+		for(i=0; i<1000; i++)
 		{
-			if( A[j] > A[j+1] )
+			A[i] = 1000 - i;
+		}
+		for(int i=0; i<size; i++)
+		{
+			for(int j=0; j<size-1; j++)
 			{
-				int temp = A[j];
-				A[j] = A[j+1];
-				A[j+1] = temp;
+				if( A[j] > A[j+1] )
+				{
+					int temp = A[j];
+					A[j] = A[j+1];
+					A[j+1] = temp;
+				}
 			}
 		}
+
+		loop += 1;
 	}
 
 	time(&end);
