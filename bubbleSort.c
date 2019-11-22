@@ -34,7 +34,7 @@ int main()
 
 	time_t end = time(NULL);
 
-	int runTime = end - start;
+	double runTime = difftime(end, start);
 
 	FILE * f;
 	f = fopen("/home/pi/Desktop/bubbleSortTimes.txt", "a");

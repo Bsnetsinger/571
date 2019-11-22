@@ -99,7 +99,7 @@ namespace _571hw3
 
             if(EE == "EE")
             {
-                taskArray = SetBestFreq(taskArray, data, type);
+                priorityArray = SetBestFreq(taskArray, data, type);
             }
 
 
@@ -151,25 +151,30 @@ namespace _571hw3
                         time = priorityArray[availableHiPriority].remainingTime;
                 }
                 
-                counter += time; 
+                counter += time;
+
+                string frequency;
 
                 if (idle)
                 {
                     processName = "IDLE";
                     power = time * data.pIdle / 1000.0;
                     idleTime += time;
+                    frequency = "IDLE";
                 }
                 else
                 {
+                    
                     processName = priorityArray[availableHiPriority].name;
                     priorityArray[availableHiPriority].Execute(time);
-                    power = time * data.p1188 / 1000.0;
+                    power = time * data.powerArray[taskArray[availableHiPriority].exeIndex] / 1000.0;
+                    frequency = priorityArray[availableHiPriority].freq.ToString();
                 }
 
                 totalPower += power;
 
 
-                Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, 1188, time, power.ToString());
+                Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, frequency, time, power.ToString());
             }
 
             double y = (idleTime) / 1000;
@@ -245,23 +250,25 @@ namespace _571hw3
                 }
 
                 counter += time;
-
+                string frequency;
                 if (idle)
                 {
                     processName = "IDLE";
                     power = time * data.pIdle / 1000.0;
                     idleTime += time;
+                    frequency = "IDLE";
                 }
                 else
                 {
                     processName = taskArray[nextTask].name;
                     taskArray[nextTask].Execute(time);
-                    power = time * data.p1188 / 1000.0;
+                    power = time * data.powerArray[taskArray[nextTask].exeIndex] / 1000.0;
+                    frequency = taskArray[nextTask].freq.ToString();
                 }
 
                 totalPower += power;
 
-                 Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, taskArray[nextTask].freq, time, power.ToString());
+                 Console.WriteLine("{0} {1} {2} {3} {4}J", counter - time, processName, frequency, time, power.ToString());
             }
 
             double y = (idleTime) / 1000;
@@ -298,7 +305,7 @@ namespace _571hw3
                  + (Convert.ToDouble(taskArray[2].exeTime) / Convert.ToDouble(taskArray[2].period)) + (Convert.ToDouble(taskArray[3].exeTime) / Convert.ToDouble(taskArray[3].period))
                  + (Convert.ToDouble(taskArray[4].exeTime) / Convert.ToDouble(taskArray[4].period));
 
-           // Console.WriteLine("{0}",test);
+
 
             if (test <= 1)
                 return true;
@@ -316,7 +323,7 @@ namespace _571hw3
                  + (Convert.ToDouble(taskArray[2].exeTime) / Convert.ToDouble(taskArray[2].period)) + (Convert.ToDouble(taskArray[3].exeTime) / Convert.ToDouble(taskArray[3].period))
                  + (Convert.ToDouble(taskArray[4].exeTime) / Convert.ToDouble(taskArray[4].period));
 
-           // Console.WriteLine("{0}", test);
+
 
             if (test <= RM)
                 return true;
@@ -371,43 +378,6 @@ namespace _571hw3
                 taskArray[i].freq = freqArray[taskArray[i].exeIndex];
 
             }
-            //if (type == "EDF")
-            //{
-            //    while (!(EDFtest(taskArray, data)))
-            //    {   
-            //        for(int i=0; i<5; i++)
-            //        {
-            //            if (taskArray[i].exeIndex == 0)
-            //            {
-            //                break;
-            //            }
-            //            if (taskArray[i].exeIndex != 0)
-            //            {
-            //                taskArray[i].exeIndex -= 1;
-            //                taskArray[i].exeTime = taskArray[i].execArray[taskArray[i].exeIndex];
-            //            }
-            //        }
-
-            //    }
-            //}
-            //else if (type == "RM")
-            //{
-            //    while (!(RMtest(taskArray, data)))
-            //    {
-            //        for (int i = 0; i < 5; i++)
-            //        {
-            //            if (taskArray[i].exeIndex == 0)
-            //            {
-            //                break;
-            //            }
-            //            if (taskArray[i].exeIndex != 0)
-            //            {
-            //                taskArray[i].exeIndex -= 1;
-            //                taskArray[i].exeTime = taskArray[i].execArray[taskArray[i].exeIndex];
-            //            }
-            //        }
-            //    }
-            //}
 
             return taskArray;
 
