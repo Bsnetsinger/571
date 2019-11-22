@@ -8,17 +8,17 @@ int main()
 	time(&start);
   
 
-    int A[1000];
+    int A[10000000];
 	srand(0);
 
 	int i;
 
-	for(i=0; i<1000; i++)
+	for(i=0; i<10000000; i++)
 	{
 		A[i] = 1000 - i;
 	}
 
-    int size = 1000;
+    int size = 10000000;
 
 	for(int i=0; i<size; i++)
 	{
