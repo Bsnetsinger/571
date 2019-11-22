@@ -4,7 +4,8 @@
 
 int main()
 {
-	time_t start = time(NULL);
+	time_t start, end;
+	time(&start);
   
 
     int A[1000];
@@ -32,7 +33,7 @@ int main()
 		}
 	}
 
-	time_t end = time(NULL);
+	time(&end);
 
 	double runTime = difftime(end, start);
 
