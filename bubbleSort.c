@@ -4,7 +4,9 @@
 
 int main()
 {
-	clock_t start_t, end_t, total_t;
+	clock_t start_t, end_t;
+
+	double total_t;
 	
 	start_t = clock();
   
@@ -41,7 +43,7 @@ int main()
 
 	end_t = clock();
 
-	total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+	total_t = ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
 
 	FILE * f;
 	f = fopen("/home/pi/Desktop/bubbleSortTimes.txt", "a");
