@@ -4,8 +4,9 @@
 
 int main()
 {
-	time_t start, end;
-	time(&start);
+	clock_t start_t, end_t, total_t;
+	
+	start_t = clock();
   
 
     int A[1000];
@@ -38,13 +39,13 @@ int main()
 		loop += 1;
 	}
 
-	time(&end);
+	end_t = clock();
 
-	double runTime = (end - start);
+	total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
 
 	FILE * f;
 	f = fopen("/home/pi/Desktop/bubbleSortTimes.txt", "a");
-	fprintf(f, "%f", runTime);
+	fprintf(f, "%f", total_t);
 
     return 0;
 
