@@ -44,7 +44,7 @@ int main()
 
 	FILE * f;
 	f = fopen("/home/pi/Desktop/bubbleSortTimes.txt", "a");
-	fprintf(f, "%f", runTime);
+	fprintf(f, "%0.3lf", runTime);
 
     return 0;
 
