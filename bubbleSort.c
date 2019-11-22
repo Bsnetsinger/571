@@ -40,7 +40,7 @@ int main()
 
 	time(&end);
 
-	double runTime = double(end - start);
+	double runTime = (end - start);
 
 	FILE * f;
 	f = fopen("/home/pi/Desktop/bubbleSortTimes.txt", "a");
