@@ -40,11 +40,11 @@ int main()
 
 	time(&end);
 
-	double runTime = difftime(end, start);
+	double runTime = double(end - start);
 
 	FILE * f;
 	f = fopen("/home/pi/Desktop/bubbleSortTimes.txt", "a");
-	fprintf(f, "%0.3lf", runTime);
+	fprintf(f, "%f", runTime);
 
     return 0;
 
