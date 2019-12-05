@@ -11,7 +11,7 @@ gcc bubbleSort.c -o bubbleSort;
 
 ./bubbleSort 
 
-top -b -m 1 > /home/pi/Desktop/data.txt;
+top -b -n 1 > /home/pi/Desktop/data.txt;
 
 
 
