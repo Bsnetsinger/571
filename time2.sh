@@ -5,7 +5,7 @@ declare -i y;
 
 gcc bubbleSort.c -o bubbleSort; 
 
-./bubbleSort & temp=$(echo "$!") &
+./bubbleSort & temp=$! &
 top -b -n 1 > /home/pi/Desktop/data.txt;
 
 echo $temp;
