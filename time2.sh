@@ -3,13 +3,9 @@
 declare -i x;
 declare -i y;
 
-start=$(date +%s.%N);
-sleep 0.851111111;
-temp=$(echo "$(date +%s.%N) - $start" | bc);
-
 gcc bubbleSort.c -o bubbleSort; 
 
-./bubbleSort & temp=$(echo $!) &
+./bubbleSort & temp=$(echo "$!") &
 top -b -n 1 > /home/pi/Desktop/data.txt;
 
 echo $temp;
