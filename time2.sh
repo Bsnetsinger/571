@@ -9,10 +9,10 @@ temp=$(echo "$(date +%s.%N) - $start" | bc);
 
 gcc bubbleSort.c -o bubbleSort; 
 
-./bubbleSort & temp=$(echo $!) & echo $temp
+./bubbleSort & temp=$(echo $!) &
 top -b -n 1 > /home/pi/Desktop/data.txt;
 
-cat /home/pi/Desktop/data.txt | grep $temp | cut -c 49 - 53 | nl
+cat /home/pi/Desktop/data.txt | grep $temp;
 
 
 #49 - 53
