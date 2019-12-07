@@ -19,7 +19,7 @@ int main()
     int size = 1000;
 	int loop = 0;
 
-	while(loop < 1000)
+	while(loop < 6500)
 	{
 		for(i=0; i<1000; i++)
 		{
