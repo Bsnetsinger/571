@@ -15,7 +15,7 @@ int main()
     float sum = 1; 
     float current = 1, prev = 0;
 
-    while(count1 < 100000000)
+    while(count1 < 10000000)
     {
         while(count2 < 10000000)
         {
