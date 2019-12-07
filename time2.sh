@@ -10,7 +10,7 @@ top -b -n 1 > /home/pi/Desktop/data.txt;
 
 echo $temp;
 
-#cat /home/pi/Desktop/data.txt | grep $temp
+cat /home/pi/Desktop/data.txt | grep $temp
 
 
 #49 - 53
