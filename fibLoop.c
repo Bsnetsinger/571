@@ -15,11 +15,11 @@ int main()
     float sum = 1; 
     float current = 1, prev = 0;
 
-    while(count1 < 1000)
+    while(count1 < 1000000)
     {
         while(count2 < 1000000)
         {
-            while(current < 70000000)
+            while(current < 20000000)
             {
                 sum = current + prev;
                 prev = current;
