@@ -10,11 +10,11 @@ int main()
 	
 	start_t = clock();
 
-    int count = 0;
+    float count = 0;
     int sum = 1; 
     int current = 1, prev = 0;
 
-    while(count < 1000000){
+    while(count < 1000000000000){
         while(current < 200000)
         {
             sum = current + prev;
