@@ -14,7 +14,7 @@ int main()
     int sum = 1; 
     int current = 1, prev = 0;
 
-    while(count < 1000000){
+    while(count < 10000000){
         while(current < 200000)
         {
             sum = current + prev;
