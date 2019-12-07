@@ -2,29 +2,41 @@
 
 declare -i x;
 declare -i y;
+declare -i nice1 = 0;
+declare -i nice2 = 0;
 
 gcc bubbleSort.c -o bubbleSort; 
-
+gcc insertSort.c -o insertSort;
 
 ./bubbleSort &
-PID=$!;
-top -b -n 1 > /home/pi/Desktop/data.txt;
+PID1=$!;
 
-echo $PID;
+./insertSort &
+PID2=$!;
 
-cat /home/pi/Desktop/data.txt | grep $PID | cut -c 49-53 | nl >> /home/pi/Desktop/cpu1.txt;
-cpuTemp="$(cat /home/pi/Desktop/data.txt | grep $PID | cut -c 49-53)";
+for i in {0..5}
+do 
+    top -b -n 1 > /home/pi/Desktop/data.txt;
 
-echo $cpuTemp;
+    cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu1.txt;
+    cpu1="$(cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53)";
 
-#49 - 53
+    cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
+    cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
 
+    if["$cpu1 -gt $cpu2"];then
+        nice2=$($nice2 - 1 | bc);
+        renice $nice2 $PID2;
+        echo $nice2;
+    fi
 
+    if["$cpu2 -gt $cpu1"];then
+        nice1=$($nice1 - 1 | bc);
+        renice $nice1 $PID1;
+        echo $nice1;
+    fi
 
-
-
-
-
+done
 
 
 
