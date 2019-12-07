@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int main()
 {
@@ -26,7 +28,7 @@ int main()
     end_t = clock();
 
 	total_t = ((double)(end_t - start_t)) / CLOCKS_PER_SEC; 
-    
+
     FILE * f;
 	f = fopen("/home/pi/Desktop/fibLoopTimes.txt", "a");
 	fprintf(f, "%f\n", total_t);
