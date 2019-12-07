@@ -28,13 +28,13 @@ do
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
 
     if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
-        nice2=$nice2 - 1;
+        nice2=$(($nice2 - 1));
         renice $nice2 $PID2;
         echo $nice2;
     fi
 
     if(( $(echo "$cpu2 > $cpu1" |bc -l) ));then
-        nice1=$nice1 - 1;
+        nice1=$(($nice1 - 1));
         renice $nice1 $PID1;
         echo $nice1;
     fi
