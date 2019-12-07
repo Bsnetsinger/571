@@ -29,13 +29,13 @@ do
 
     if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
         nice2=$(($nice2 - 1));
-        renice $nice2 $PID2;
+        sudo renice $nice2 $PID2;
         echo $nice2;
     fi
 
     if(( $(echo "$cpu2 > $cpu1" |bc -l) ));then
         nice1=$(($nice1 - 1));
-        renice $nice1 $PID1;
+        sudo renice $nice1 $PID1;
         echo $nice1;
     fi
 
