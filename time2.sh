@@ -11,7 +11,7 @@ nice2=0;
 gcc bubbleSort.c -o bubbleSort; 
 gcc insertSort.c -o insertSort;
 
-sudo nice -n -10 bubbleSort &
+sudo nice -n -10 ./bubbleSort &
 PID1=$!;
 
 ./insertSort &
