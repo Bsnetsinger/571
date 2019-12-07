@@ -12,7 +12,7 @@ top -b -n 1 > /home/pi/Desktop/data.txt;
 
 echo $PID;
 
-cat /home/pi/Desktop/data.txt | grep $PID | cut -c 49-53 | nl > /home/pi/Desktop/data.txt;
+cat /home/pi/Desktop/data.txt | grep $PID | cut -c 49-53 | nl > /home/pi/Desktop/cpu1.txt;
 
 
 #49 - 53
