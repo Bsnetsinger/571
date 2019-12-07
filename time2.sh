@@ -5,11 +5,12 @@ declare -i y;
 
 gcc bubbleSort.c -o bubbleSort; 
 
-./bubbleSort &&
-pid=$! &
+typeset -n _pid=$1
+./bubbleSort &
+_pid=$! &
 top -b -n 1 > /home/pi/Desktop/data.txt;
 
-echo $pid;
+echo $_pid;
 
 #cat /home/pi/Desktop/data.txt | grep $temp
 
