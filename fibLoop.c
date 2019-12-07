@@ -15,7 +15,7 @@ int main()
     float current = 1, prev = 0;
 
     while(count < 10000000){
-        while(current < 500000)
+        while(current < 7000000)
         {
             sum = current + prev;
             prev = current;
