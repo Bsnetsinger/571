@@ -14,8 +14,8 @@ int main()
     float sum = 1; 
     float current = 1, prev = 0;
 
-    while(count < 10000000){
-        while(current < 7000000000)
+    while(count < 12500000){
+        while(current < 700000000)
         {
             sum = current + prev;
             prev = current;
