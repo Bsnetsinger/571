@@ -21,18 +21,17 @@ int main()
             current = sum;
         }
 
+        end_t = clock();
+
+	    total_t = ((double)(end_t - start_t)) / CLOCKS_PER_SEC; 
+
+         FILE * f;
+	    f = fopen("/home/pi/Desktop/fibLoopTimes.txt", "a");
+	    fprintf(f, "%f\n", total_t);
+
         return 0;
 
     }
-
-    end_t = clock();
-
-	total_t = ((double)(end_t - start_t)) / CLOCKS_PER_SEC; 
-
-    FILE * f;
-	f = fopen("/home/pi/Desktop/fibLoopTimes.txt", "a");
-	fprintf(f, "%f\n", total_t);
-    
 
 }
 
