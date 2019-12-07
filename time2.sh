@@ -13,7 +13,9 @@ top -b -n 1 > /home/pi/Desktop/data.txt;
 echo $PID;
 
 cat /home/pi/Desktop/data.txt | grep $PID | cut -c 49-53 | nl > /home/pi/Desktop/cpu1.txt;
+cpuTemp=$(echo"cat /home/pi/Desktop/data.txt | grep $PID | cut -c 49-53");
 
+echo $cpuTemp;
 
 #49 - 53
 
