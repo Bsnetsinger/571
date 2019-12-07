@@ -2,8 +2,11 @@
 
 declare -i x;
 declare -i y;
-declare -i nice1 = 0;
-declare -i nice2 = 0;
+declare -i nice1;
+declare -i nice2;
+
+nice1=0;
+nice2=0;
 
 gcc bubbleSort.c -o bubbleSort; 
 gcc insertSort.c -o insertSort;
@@ -24,13 +27,13 @@ do
     cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
 
-    if["$cpu1 -gt $cpu2"];then
+    if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
         nice2=$($nice2 - 1 | bc);
         renice $nice2 $PID2;
         echo $nice2;
     fi
 
-    if["$cpu2 -gt $cpu1"];then
+    if(( $(echo "$cpu2 > $cpu1" |bc -l) ));then
         nice1=$($nice1 - 1 | bc);
         renice $nice1 $PID1;
         echo $nice1;
