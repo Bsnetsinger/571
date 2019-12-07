@@ -2,6 +2,12 @@
 
 int main()
 {
+    clock_t start_t, end_t;
+
+	double total_t;
+	
+	start_t = clock();
+
     int sum = 1; 
     int current = 1, prev = 0;
 
@@ -16,6 +22,14 @@ int main()
         return 0;
 
     }
+
+    end_t = clock();
+
+	total_t = ((double)(end_t - start_t)) / CLOCKS_PER_SEC; 
+    
+    FILE * f;
+	f = fopen("/home/pi/Desktop/fibLoopTimes.txt", "a");
+	fprintf(f, "%f\n", total_t);
     
 
 }
