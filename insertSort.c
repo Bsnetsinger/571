@@ -18,7 +18,7 @@ int main()
 	int loop = 0;
 
 	int i, key, j;
-    while(loop < 6500)
+    while(loop < 13000)
     {
         for(i=0; i<1000; i++)
 		{
