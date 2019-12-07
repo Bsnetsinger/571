@@ -13,9 +13,7 @@ int main()
 
     int A[1000];
 	srand(0);
-
-	int i, j;
-
+    
     int size = 1000;
 	int loop = 0;
 
