@@ -13,7 +13,7 @@ int main()
 
     int A[1000];
 	srand(0);
-    
+
     int size = 1000;
 	int loop = 0;
 
@@ -36,7 +36,7 @@ int main()
             }  
             A[j + 1] = key;  
         }
-
+        loop += 1;
     }
 
 	end_t = clock();
