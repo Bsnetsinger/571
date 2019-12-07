@@ -33,18 +33,6 @@ int main()
         count1 += 1;
 
     }
-    while(count2 < 1000000){
-        while(current < 70000000)
-        {
-            sum = current + prev;
-            prev = current;
-            current = sum;
-        }
-        sum = 1;
-        current = 1;
-        prev = 0;
-        count += 1;
-    }
     end_t = clock();
 
 	total_t = ((double)(end_t - start_t)) / CLOCKS_PER_SEC; 
