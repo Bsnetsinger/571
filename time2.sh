@@ -28,13 +28,13 @@ do
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
 
     if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
-        nice2=$(echo "$nice2 - 1" | bc);
+        nice2=$nice2 - 1;
         renice $nice2 $PID2;
         echo $nice2;
     fi
 
     if(( $(echo "$cpu2 > $cpu1" |bc -l) ));then
-        nice1=$(echo "$nice1 - 1" |bc);
+        nice1=$nice1 - 1;
         renice $nice1 $PID1;
         echo $nice1;
     fi
@@ -60,7 +60,7 @@ done
 #         sudo nice -n $i ./fibLoop &
 #         sudo nice -n $j ./bubbleSort &
 #         wait;
-#         dur=$(echo "$(date +%s.%N) - $start" | bc);
+#        dur=$(echo "$(date +%s.%N) - $start" | bc);
 #         echo "$i $j $dur" >> /home/pi/Desktop/data.txt;
 #         if (( $(echo "$temp > $dur" |bc -l) ))
 #         then
