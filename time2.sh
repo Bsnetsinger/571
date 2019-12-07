@@ -14,6 +14,8 @@ gcc insertSort.c -o insertSort;
 ./bubbleSort &
 PID1=$!;
 
+sudo renice -10 $PID1;
+
 ./insertSort &
 PID2=$!;
 
