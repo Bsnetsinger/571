@@ -11,8 +11,10 @@ nice2=0;
 gcc bubbleSort.c -o bubbleSort; 
 gcc insertSort.c -o insertSort;
 
-sudo nice -n -10 ./bubbleSort &
+./bubbleSort &
 PID1=$!;
+
+sudo renice -10 $PID1;
 
 ./insertSort &
 PID2=$!;
