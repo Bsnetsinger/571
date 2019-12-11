@@ -5,8 +5,8 @@ declare -i y;
 declare -i nice1;
 declare -i nice2;
 
-nice1=-10;
-nice2=0;
+nice1=-20;
+nice2=19;
 
 gcc bubbleSort.c -o bubbleSort; 
 gcc insertSort.c -o insertSort;
@@ -14,7 +14,8 @@ gcc insertSort.c -o insertSort;
 ./bubbleSort &
 PID1=$!;
 
-sudo renice -10 $PID1;
+sudo renice -20 $PID1;
+sudo renice 19 $PID2;
 
 ./insertSort &
 PID2=$!;
