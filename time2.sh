@@ -55,7 +55,7 @@ do
         break;
     fi
 
-    if ["$stop" ] ; then
+    if [ "$stop" ] ; then
         if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
             nice2=$(($nice2 - 1));
             sudo renice $nice2 $PID2;
