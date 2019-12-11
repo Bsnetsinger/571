@@ -42,7 +42,11 @@ do
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
     fi
     
-    if(( $(echo "$cpu2 - $cpu1 == 1" |bc -l) ));then
+    if [ (("$cpu1" - 1)) -eq $cpu2 ] ; then
+        stop=0;
+    fi
+
+    if [ (("$cpu2" - 1)) -eq $cpu1 ] ; then
         stop=0;
     fi
 
