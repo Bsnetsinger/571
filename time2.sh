@@ -52,17 +52,17 @@ do
         #echo $nice1;
     fi
     
-    if [ "$cpu1 == 0" ] && [ "$flag1"] ; then
+    if [ "$cpu1" == 0 ] && [ "$flag1"] ; then
         dur1=$(echo "$(date +%s.%N) - $start" | bc);
         flag1=0;
     fi
 
-    if [ "$cpu2 == 0.0" ] && [ "$flag2" ] ; then
+    if [ "$cpu2" == 0.0 ] && [ "$flag2" ] ; then
         dur2=$(echo "$(date +%s.%N) - $start" | bc);
         flag2=0;
     fi
 
-    if [ "$cpu1 == 0.0" ] && [ "$cpu2 == 0.0" ] ; then
+    if [ "$cpu1" == 0.0 ] && [ "$cpu2" == 0.0 ] ; then
         break;
     fi
 done
