@@ -52,7 +52,7 @@ do
         #echo $nice1;
     fi
     
-    if [ "$cpu1 == 0.0" ] && [ "$flag1"]
+    if [ "$cpu1 == 0" ] && [ "$flag1"]
         dur1=$(echo "$(date +%s.%N) - $start" | bc);
         flag1=0;
     fi
