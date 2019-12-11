@@ -26,7 +26,7 @@ start=$(date +%s.%N);
 ./userFile &
 PID1=$!;
  
-while [ "stop" -eq "1" ]
+while [ $stop -eq 1 ]
 do 
     
     top -b -n 1 > /home/pi/Desktop/data.txt;
