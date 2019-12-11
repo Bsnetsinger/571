@@ -28,9 +28,12 @@ do
 
     cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu1.txt;
     cpu1="$(cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53)";
+    
 
     cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
+
+    #if cpu1/2 == NULL, process has finished
 
     if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
         nice2=$(($nice2 - 1));
