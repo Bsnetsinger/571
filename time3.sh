@@ -31,10 +31,10 @@ do
     
     top -b -n 1 > /home/pi/Desktop/data.txt;
     
-    cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 17-19,49-53 | nl >> /home/pi/Desktop/cpu1.txt;
+    cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 21-23,49-53 | nl >> /home/pi/Desktop/cpu1.txt;
     cpu1="$(cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53)";
     
-    cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 17-19,49-53 | nl >> /home/pi/Desktop/cpu2.txt;
+    cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 21-23,49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
     
     diff=$(echo "$cpu1 - $userP" | bc);
