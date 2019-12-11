@@ -7,6 +7,7 @@ declare -i nice2;
 
 flag1=1;
 flag2=1;
+stop=1;
 
 nice1=0;
 nice2=19;
@@ -37,34 +38,38 @@ do
 
     cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
-
-    #if cpu1/2 == NULL, process has finished
-
-    if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
-        nice2=$(($nice2 - 1));
-        sudo renice $nice2 $PID2;
-        #echo $nice2;
-    fi
-
-    if(( $(echo "$cpu2 > $cpu1" |bc -l) ));then
-        nice1=$(($nice1 - 1));
-        sudo renice $nice1 $PID1;
-        #echo $nice1;
-    fi
     
     if [ "$cpu1" == 0 ] && [ "$flag1"] ; then
         dur1=$(echo "$(date +%s.%N) - $start" | bc);
         flag1=0;
+        stop=0;
     fi
 
     if [ "$cpu2" == 0.0 ] && [ "$flag2" ] ; then
         dur2=$(echo "$(date +%s.%N) - $start" | bc);
         flag2=0;
+        stop=0;
     fi
 
     if [ "$cpu1" == 0.0 ] && [ "$cpu2" == 0.0 ] ; then
         break;
     fi
+
+    if ["$stop" ] ; then
+        if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
+            nice2=$(($nice2 - 1));
+            sudo renice $nice2 $PID2;
+            #echo $nice2;
+        fi
+
+        if(( $(echo "$cpu2 > $cpu1" |bc -l) ));then
+            nice1=$(($nice1 - 1));
+            sudo renice $nice1 $PID1;
+            #echo $nice1;
+        fi
+    fi
+    
+    
 done
 
 echo "CPU1 $dur1 CPU2 $dur2" >> /home/pi/Desktop/durations.txt
