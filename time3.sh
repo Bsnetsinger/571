@@ -38,12 +38,20 @@ do
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
     
     diff=$(echo "$cpu1 - $userP" | bc);
- 
+    
+    if [ -z "$cpu1" ] ; then
+        break;
+    fi
+    
     if(( $(echo "$diff < -25" |bc -l) ));then
          nice=$(($nice - 2));
         sudo renice $nice $PID1;
     fi
- 
+
+    if [ -z "$cpu1" ] ; then
+        break;
+    fi
+     
     if(( $(echo "($diff > -25) && ($diff < -5)" |bc -l) ));then
         nice=$(($nice - 1));
         sudo renice $nice $PID1;
@@ -56,14 +64,26 @@ do
         fi
     fi
  
+    if [ -z "$cpu1" ] ; then
+        break;
+    fi
+
     if(( $(echo "$diff > 25" |bc -l) ));then
         nice=$(($nice + 2));
         sudo renice $nice $PID1;
     fi
  
+    if [ -z "$cpu1" ] ; then
+        break;
+    fi
+
     if(( $(echo "($diff < 25) && ($diff > 5)" |bc -l) ));then
         nice=$(($nice + 1));
         sudo renice $nice $PID1;
+    fi
+
+    if [ -z "$cpu1" ] ; then
+        break;
     fi
 
     if(( $(echo "($diff < 5) && ($diff > 0)" |bc -l) ));then
@@ -73,15 +93,9 @@ do
         fi
     fi
 
-    if [ -z "$cpu1" ] ; then
-        stop=0;
-    fi
-
     x=$(($x + 1));
 
     echo "$x $data1" >> /home/pi/Desktop/x.txt;
-
-    echo "$x" >> /home/pi/Desktop/x.txt
     
     if [ "$x" -eq "30" ] ; then
         ./insertSort &
