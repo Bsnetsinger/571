@@ -47,7 +47,7 @@ do
         stop=0;
     fi
 
-    if [ (($cpu2" - 1)) -eq $cpu1 ] ; then
+    if [ (($cpu2 - 1)) -eq $cpu1 ] ; then
         stop=0;
     fi
 
