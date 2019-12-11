@@ -28,7 +28,7 @@ PID2=$!;
 
 sudo renice 19 $PID2;
 
-for i in {0..200}
+for i in {0..1000}
 do 
     if (($i % 10 == 0))
     then
