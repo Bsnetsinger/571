@@ -42,6 +42,10 @@ do
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
     fi
     
+    if [ -z "$cpu1" ] && [ -z "$cpu2" ] ; then
+    break;
+    fi
+    
     if [ -z "$cpu1" ] && [ "$flag1" -eq "1" ] ; then
         dur1=$(echo "$(date +%s.%N) - $start" | bc);
         flag1=0;
@@ -52,10 +56,6 @@ do
         dur2=$(echo "$(date +%s.%N) - $start" | bc);
         flag2=0;
         stop=0;
-    fi
-
-    if [ -z "$cpu1" ] && [ -z "$cpu2" ] ; then
-        break;
     fi
 
     if [ "$stop" -eq "1" ] ; then
