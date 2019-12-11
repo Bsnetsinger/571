@@ -31,10 +31,10 @@ do
     
     top -b -n 1 > /home/pi/Desktop/data.txt;
     
-    cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu1.txt;
+    cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 17-18,49-53 | nl >> /home/pi/Desktop/cpu1.txt;
     cpu1="$(cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53)";
     
-    cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
+    cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 17-18,49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
     
     diff=$(echo "$cpu1 - $userP" | bc);
@@ -52,6 +52,7 @@ do
     if(( $(echo "($diff > -5) && ($diff < 0)" |bc -l) ));then
         if [ "$flag1" -eq "1" ] ; then
             dur=$(echo "$(date +%s.%N) - $start" | bc);
+            flag1=0;
         fi
     fi
  
@@ -68,6 +69,7 @@ do
     if(( $(echo "($diff < 5) && ($diff > 0)" |bc -l) ));then
         if [ "$flag1" -eq "1" ] ; then
             dur=$(echo "$(date +%s.%N) - $start" | bc);
+            flag1=0;
         fi
     fi
 
@@ -77,9 +79,9 @@ do
 
     x=$(($x + 1));
 
-    echo "$x" >> /home/pi/Desktop/x.txt
+    echo "$x" > /home/pi/Desktop/x.txt
     
-    if [ "$x" -eq "1000000000" ] ; then
+    if [ "$x" -eq "100" ] ; then
         ./insertSort &
         PID3=$!;
     fi
