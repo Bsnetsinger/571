@@ -28,9 +28,9 @@ PID2=$!;
 
 sudo renice 19 $PID2;
 
-for i in {0..100}
+for i in {0..200}
 do 
-    if (($i % 20 == 0))
+    if (($i % 10 == 0))
     then
 
         top -b -n 1 > /home/pi/Desktop/data.txt;
