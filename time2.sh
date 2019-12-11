@@ -5,11 +5,16 @@ declare -i y;
 declare -i nice1;
 declare -i nice2;
 
+flag1=1;
+flag2=1;
+
 nice1=0;
 nice2=19;
 
 gcc bubbleSort.c -o bubbleSort; 
 gcc insertSort.c -o insertSort;
+
+start=$(date +%s.%N);
 
 ./bubbleSort &
 PID1=$!;
@@ -22,7 +27,7 @@ PID2=$!;
 
 sudo renice 19 $PID2;
 
-for i in {0..5}
+for i in {0..100}
 do 
     top -b -n 1 > /home/pi/Desktop/data.txt;
 
@@ -32,8 +37,7 @@ do
 
     cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
-    echo $cpu1;
-    echo $cpu2;
+
     #if cpu1/2 == NULL, process has finished
 
     if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
@@ -47,9 +51,23 @@ do
         sudo renice $nice1 $PID1;
         #echo $nice1;
     fi
-    sleep 10s
+    
+    if[ "$cpu1 == 0.0" ] && [ "$flag1"]
+        dur1=$(echo "$(date +%s.%N) - $start" | bc);
+        flag1=0;
+    fi
+
+    if[ "$cpu2 == 0.0" ] && [ "$flag2" ]
+        dur2=$(echo "$(date +%s.%N) - $start" | bc);
+        flag2=0;
+    fi
+
+    if[ "$cpu1 == 0.0" ] && [ "$cpu2 == 0.0" ]
+        break;
+    fi
 done
 
+echo "CPU1 $dur1 CPU2 $dur2" >> /home/pi/Desktop/durations.txt
 
 
 
