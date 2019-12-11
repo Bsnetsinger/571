@@ -44,12 +44,12 @@ do
         sudo renice $nice $PID1;
     fi
  
-    if(( $(echo "($diff > -30) && ($diff < -10)" |bc -l) ));then
+    if(( $(echo "($diff > -30) && ($diff < -5)" |bc -l) ));then
         nice=$(($nice - 1));
         sudo renice $nice $PID1;
     fi
     
-    if(( $(echo "($diff > -10) && ($diff < 0)" |bc -l) ));then
+    if(( $(echo "($diff > -5) && ($diff < 0)" |bc -l) ));then
         stop=0;
     fi
  
@@ -58,12 +58,12 @@ do
         sudo renice $nice $PID1;
     fi
  
-    if(( $(echo "($diff < 30) && ($diff > 10)" |bc -l) ));then
+    if(( $(echo "($diff < 30) && ($diff > 5)" |bc -l) ));then
         nice=$(($nice + 1));
         sudo renice $nice $PID1;
     fi
 
-    if(( $(echo "($diff < 10) && ($diff > 0)" |bc -l) ));then
+    if(( $(echo "($diff < 5) && ($diff > 0)" |bc -l) ));then
         stop=0;
         dur=$(echo "$(date +%s.%N) - $start" | bc);
     fi
