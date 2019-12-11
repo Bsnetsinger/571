@@ -22,7 +22,7 @@ PID2=$!;
 
 sudo renice 19 $PID2;
 
-for i in {0..10}
+for i in {0..5}
 do 
     top -b -n 1 > /home/pi/Desktop/data.txt;
 
@@ -39,15 +39,15 @@ do
     if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
         nice2=$(($nice2 - 1));
         sudo renice $nice2 $PID2;
-        echo $nice2;
+        #echo $nice2;
     fi
 
     if(( $(echo "$cpu2 > $cpu1" |bc -l) ));then
         nice1=$(($nice1 - 1));
         sudo renice $nice1 $PID1;
-        echo $nice1;
+        #echo $nice1;
     fi
-
+    sleep 10s
 done
 
 
