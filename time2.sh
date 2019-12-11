@@ -32,12 +32,15 @@ for i in {0..100}
 do 
     top -b -n 1 > /home/pi/Desktop/data.txt;
 
+    if [ "$flag1" ] ; then
     cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu1.txt;
     cpu1="$(cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53)";
+    fi
     
-
+    if [ "$flag2" ] ; then
     cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
+    fi
     
     if [ "$cpu1" == 0 ] && [ "$flag1"] ; then
         dur1=$(echo "$(date +%s.%N) - $start" | bc);
