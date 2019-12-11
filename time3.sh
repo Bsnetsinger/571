@@ -18,17 +18,18 @@ gcc insertSort.c -o insertSort;
  
 start=$(date +%s.%N);
  
+./insertSort &
+PID2=$!;
+
+start=$(date +%s.%N);
+
 ./userFile &
 PID1=$!;
  
-./insertSort &
-PID2=$!;
- 
-while ["stop" -eq "1"]
+while [ "stop" -eq "1" ]
 do 
     
     top -b -n 1 > /home/pi/Desktop/data.txt;
- 
  
     cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu1.txt;
     cpu1="$(cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53)";
@@ -64,10 +65,17 @@ do
 
     if(( $(echo "($diff < 10) && ($diff > 0)" |bc -l) ));then
         stop=0;
+        dur=$(echo "$(date +%s.%N) - $start" | bc);
     fi
- 
     
-    # if [ -z "$cpu1" ] && [ "$flag1" -eq "1" ] ; then
+    
+done
+ 
+echo "Time: $dur" >> /home/pi/Desktop/time.txt
+ 
+ 
+ 
+     # if [ -z "$cpu1" ] && [ "$flag1" -eq "1" ] ; then
     #     dur1=$(echo "$(date +%s.%N) - $start" | bc);
     #     flag1=0;
     #     stop=0;
@@ -100,15 +108,6 @@ do
     #         #echo $nice1;
     #     fi
     # fi
-    
-    
-done
- 
-echo "CPU1 $dur1 CPU2 $dur2" >> /home/pi/Desktop/durations.txt
- 
- 
- 
- 
  
  
  
