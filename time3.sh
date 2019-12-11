@@ -79,9 +79,9 @@ do
 
     x=$(($x + 1));
 
-    echo "$x" > /home/pi/Desktop/x.txt
+    echo "$x" >> /home/pi/Desktop/x.txt
     
-    if [ "$x" -eq "100" ] ; then
+    if [ "$x" -eq "30" ] ; then
         ./insertSort &
         PID3=$!;
     fi
