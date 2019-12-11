@@ -61,6 +61,10 @@ do
         stop=0;
     fi
 
+    if [ -z "$cpu1" ] && [ -z "$cpu2" ] ; then
+    break;
+    fi
+
     if [ "$stop" -eq "1" ] ; then
         if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
             nice2=$(($nice2 - 1));
