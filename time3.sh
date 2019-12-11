@@ -8,6 +8,7 @@ nice=0;
 flag1=1;
 flag2=1;
 stop=1;
+run=1;
  
 read -p 'File: ' userFile
 read -p 'CPU Percentage: ' userP
@@ -26,49 +27,56 @@ start=$(date +%s.%N);
 ./userFile &
 PID1=$!;
  
-while [ $stop -eq 1 ]
+while [ $run -eq 1 ]
 do 
     
     top -b -n 1 > /home/pi/Desktop/data.txt;
- 
+    
     cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu1.txt;
     cpu1="$(cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53)";
     
     cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
     
-    diff=$(echo "$cpu1 - $userP" | bc);
- 
-    if(( $(echo "$diff < -25" |bc -l) ));then
-         nice=$(($nice - 2));
-        sudo renice $nice $PID1;
-    fi
- 
-    if(( $(echo "($diff > -25) && ($diff < -5)" |bc -l) ));then
-        nice=$(($nice - 1));
-        sudo renice $nice $PID1;
-    fi
+    if [ "$stop" -eq "1" ] ; then
+
+        diff=$(echo "$cpu1 - $userP" | bc);
     
-    if(( $(echo "($diff > -5) && ($diff < 0)" |bc -l) ));then
-        stop=0;
-    fi
- 
-    if(( $(echo "$diff > 25" |bc -l) ));then
-        nice=$(($nice + 2));
-        sudo renice $nice $PID1;
-    fi
- 
-    if(( $(echo "($diff < 25) && ($diff > 5)" |bc -l) ));then
-        nice=$(($nice + 1));
-        sudo renice $nice $PID1;
+        if(( $(echo "$diff < -25" |bc -l) ));then
+            nice=$(($nice - 2));
+            sudo renice $nice $PID1;
+        fi
+    
+        if(( $(echo "($diff > -25) && ($diff < -5)" |bc -l) ));then
+            nice=$(($nice - 1));
+            sudo renice $nice $PID1;
+        fi
+        
+        if(( $(echo "($diff > -5) && ($diff < 0)" |bc -l) ));then
+            dur=$(echo "$(date +%s.%N) - $start" | bc);
+            stop=0;
+        fi
+    
+        if(( $(echo "$diff > 25" |bc -l) ));then
+            nice=$(($nice + 2));
+            sudo renice $nice $PID1;
+        fi
+    
+        if(( $(echo "($diff < 25) && ($diff > 5)" |bc -l) ));then
+            nice=$(($nice + 1));
+            sudo renice $nice $PID1;
+        fi
+
+        if(( $(echo "($diff < 5) && ($diff > 0)" |bc -l) ));then
+            stop=0;
+            dur=$(echo "$(date +%s.%N) - $start" | bc);
+        fi
     fi
 
-    if(( $(echo "($diff < 5) && ($diff > 0)" |bc -l) ));then
-        stop=0;
-        dur=$(echo "$(date +%s.%N) - $start" | bc);
+    if [ -z "$cpu1" ] ; then
+        break;
     fi
-    
-    
+       
 done
  
 echo "Time: $dur" >> /home/pi/Desktop/time.txt
