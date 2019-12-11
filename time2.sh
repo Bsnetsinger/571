@@ -43,15 +43,15 @@ do
     fi
     
 
-    if [ $(($nice1 - 1)) -eq $nice2 ] ; then
+    if [ "$(($nice1 - 1))" -eq "$nice2" ] ; then
         stop=0;
     fi
 
-    if [ $(($nice2 - 1)) -eq $nice1 ] ; then
+    if [ "$(($nice2 - 1))" -eq "$nice1" ] ; then
         stop=0;
     fi
 
-    if [ -z "$cpu1" ] && [ "$flag1"] ; then
+    if [ -z "$cpu1" ] && [ "$flag1" ] ; then
         dur1=$(echo "$(date +%s.%N) - $start" | bc);
         flag1=0;
         stop=0;
