@@ -43,11 +43,11 @@ do
     fi
     
 
-    if [ $(($cpu1 - 1)) -eq $cpu2 ] ; then
+    if [ $(($nice1 - 1)) -eq $nice2 ] ; then
         stop=0;
     fi
 
-    if [ $(($cpu2 - 1)) -eq $cpu1 ] ; then
+    if [ $(($nice2 - 1)) -eq $nice1 ] ; then
         stop=0;
     fi
 
