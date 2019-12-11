@@ -22,7 +22,7 @@ PID2=$!;
 
 sudo renice 19 $PID2;
 
-for i in {0..5}
+for i in {0..10}
 do 
     top -b -n 1 > /home/pi/Desktop/data.txt;
 
@@ -32,7 +32,8 @@ do
 
     cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
-
+    echo $cpu1;
+    echo $cpu2;
     #if cpu1/2 == NULL, process has finished
 
     if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
