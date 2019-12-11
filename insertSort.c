@@ -18,9 +18,9 @@ int main()
 	int loop = 0;
 
 	int i, key, j;
-    while(loop < 15200)
+    while(loop < 252000)
     {
-        for(i=0; i<1000; i++)
+        for(i=0; i<10000; i++)
 		{
 			A[i] = 1000 - i;
 		} 

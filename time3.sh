@@ -87,6 +87,8 @@ do
     fi
 
 done
+
+killall insertSort;
  
 echo "Time: $dur" >> /home/pi/Desktop/time.txt
  
