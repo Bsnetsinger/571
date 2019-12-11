@@ -83,7 +83,7 @@ do
     
     if [ "$x" -eq "30" ] ; then
         ./insertSort &
-        PID3=$!;
+        echo $!;
     fi
 
 done
