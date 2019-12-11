@@ -39,12 +39,12 @@ do
     
     diff=$(echo "$cpu1 - $userP" | bc);
  
-    if(( $(echo "$diff < -30" |bc -l) ));then
+    if(( $(echo "$diff < -15" |bc -l) ));then
          nice=$(($nice - 2));
         sudo renice $nice $PID1;
     fi
  
-    if(( $(echo "($diff > -30) && ($diff < -5)" |bc -l) ));then
+    if(( $(echo "($diff > -15) && ($diff < -5)" |bc -l) ));then
         nice=$(($nice - 1));
         sudo renice $nice $PID1;
     fi
@@ -53,12 +53,12 @@ do
         stop=0;
     fi
  
-    if(( $(echo "$diff > 30" |bc -l) ));then
+    if(( $(echo "$diff > 15" |bc -l) ));then
         nice=$(($nice + 2));
         sudo renice $nice $PID1;
     fi
  
-    if(( $(echo "($diff < 30) && ($diff > 5)" |bc -l) ));then
+    if(( $(echo "($diff < 15) && ($diff > 5)" |bc -l) ));then
         nice=$(($nice + 1));
         sudo renice $nice $PID1;
     fi
