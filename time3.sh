@@ -31,7 +31,7 @@ do
     
     top -b -n 1 > /home/pi/Desktop/data.txt;
     
-    cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 20-23,49-53 | nl >> /home/pi/Desktop/cpu1.txt;
+    data1="$(cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 20-23,49-53)";
     cpu1="$(cat /home/pi/Desktop/data.txt | grep $PID1 | cut -c 49-53)";
     
     cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 20-23,49-53 | nl >> /home/pi/Desktop/cpu2.txt;
@@ -78,6 +78,8 @@ do
     fi
 
     x=$(($x + 1));
+
+    echo "$x $data1" >> /home/pi/Desktop/x.txt;
 
     echo "$x" >> /home/pi/Desktop/x.txt
     
