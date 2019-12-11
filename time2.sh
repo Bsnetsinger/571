@@ -5,12 +5,14 @@ declare -i y;
 declare -i nice1;
 declare -i nice2;
 
+
+
 flag1=1;
 flag2=1;
 stop=1;
 
-nice1=0;
-nice2=19;
+nice1=$(($(($RANDOM % 20)) - 20));
+nice2=$(($(($RANDOM % 20)) - 20));
 
 gcc bubbleSort.c -o bubbleSort; 
 gcc insertSort.c -o insertSort;
@@ -20,13 +22,13 @@ start=$(date +%s.%N);
 ./bubbleSort &
 PID1=$!;
 
-sudo renice 0 $PID1;
+sudo renice $nice1 $PID1;
 
 
 ./insertSort &
 PID2=$!;
 
-sudo renice 19 $PID2;
+sudo renice $nice2 $PID2;
 
 for i in {0..100}
 do 
@@ -63,12 +65,16 @@ do
         if(( $(echo "$cpu1 > $cpu2" |bc -l) ));then
             nice2=$(($nice2 - 1));
             sudo renice $nice2 $PID2;
+            nice1=$(($nice1 + 1));
+            sudo renice $nice1 $PID1;
             #echo $nice2;
         fi
 
         if(( $(echo "$cpu2 > $cpu1" |bc -l) ));then
             nice1=$(($nice1 - 1));
             sudo renice $nice1 $PID1;
+            nice2=$(($nice2 + 1));
+            sudo renice $nice2 $PID2;
             #echo $nice1;
         fi
     fi
