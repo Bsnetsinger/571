@@ -6,7 +6,7 @@ declare -i nice1;
 declare -i nice2;
 
 nice1=0;
-nice2=20;
+nice2=19;
 
 gcc bubbleSort.c -o bubbleSort; 
 gcc insertSort.c -o insertSort;
@@ -15,10 +15,12 @@ gcc insertSort.c -o insertSort;
 PID1=$!;
 
 sudo renice 0 $PID1;
-sudo renice 20 $PID2;
+
 
 ./insertSort &
 PID2=$!;
+
+sudo renice 19 $PID2;
 
 for i in {0..5}
 do 
