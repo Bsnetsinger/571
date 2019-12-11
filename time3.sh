@@ -8,7 +8,6 @@ nice=0;
 flag1=1;
 flag2=1;
 stop=1;
-run=1;
  
 read -p 'File: ' userFile
 read -p 'CPU Percentage: ' userP
@@ -27,7 +26,7 @@ start=$(date +%s.%N);
 ./userFile &
 PID1=$!;
  
-while [ $run -eq 1 ]
+while [ $stop -eq 1 ]
 do 
     
     top -b -n 1 > /home/pi/Desktop/data.txt;
@@ -38,45 +37,53 @@ do
     cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53 | nl >> /home/pi/Desktop/cpu2.txt;
     cpu2="$(cat /home/pi/Desktop/data.txt | grep $PID2 | cut -c 49-53)";
     
-    if [ "$stop" -eq "1" ] ; then
-
-        diff=$(echo "$cpu1 - $userP" | bc);
+    diff=$(echo "$cpu1 - $userP" | bc);
+ 
+    if(( $(echo "$diff < -25" |bc -l) ));then
+         nice=$(($nice - 2));
+        sudo renice $nice $PID1;
+    fi
+ 
+    if(( $(echo "($diff > -25) && ($diff < -5)" |bc -l) ));then
+        nice=$(($nice - 1));
+        sudo renice $nice $PID1;
+    fi
     
-        if(( $(echo "$diff < -25" |bc -l) ));then
-            nice=$(($nice - 2));
-            sudo renice $nice $PID1;
-        fi
-    
-        if(( $(echo "($diff > -25) && ($diff < -5)" |bc -l) ));then
-            nice=$(($nice - 1));
-            sudo renice $nice $PID1;
-        fi
-        
-        if(( $(echo "($diff > -5) && ($diff < 0)" |bc -l) ));then
+    if(( $(echo "($diff > -5) && ($diff < 0)" |bc -l) ));then
+        if [ "$flag1" -eq "1" ] ; then
             dur=$(echo "$(date +%s.%N) - $start" | bc);
-            stop=0;
         fi
-    
-        if(( $(echo "$diff > 25" |bc -l) ));then
-            nice=$(($nice + 2));
-            sudo renice $nice $PID1;
-        fi
-    
-        if(( $(echo "($diff < 25) && ($diff > 5)" |bc -l) ));then
-            nice=$(($nice + 1));
-            sudo renice $nice $PID1;
-        fi
+    fi
+ 
+    if(( $(echo "$diff > 25" |bc -l) ));then
+        nice=$(($nice + 2));
+        sudo renice $nice $PID1;
+    fi
+ 
+    if(( $(echo "($diff < 25) && ($diff > 5)" |bc -l) ));then
+        nice=$(($nice + 1));
+        sudo renice $nice $PID1;
+    fi
 
-        if(( $(echo "($diff < 5) && ($diff > 0)" |bc -l) ));then
-            stop=0;
+    if(( $(echo "($diff < 5) && ($diff > 0)" |bc -l) ));then
+        if [ "$flag1" -eq "1" ] ; then
             dur=$(echo "$(date +%s.%N) - $start" | bc);
         fi
     fi
 
     if [ -z "$cpu1" ] ; then
-        break;
+        stop=0;
     fi
-       
+
+    x=$(($x + 1));
+
+    echo "$x" >> /home/pi/Desktop/x.txt
+    
+    if [ "$x" -eq "1000000000" ] ; then
+        ./insertSort &
+        PID3=$!;
+    fi
+
 done
  
 echo "Time: $dur" >> /home/pi/Desktop/time.txt
